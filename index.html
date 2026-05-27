@@ -14,6 +14,10 @@
 </head>
 <body>
     <style>
+
+    * {
+    -webkit-tap-highlight-color: transparent;
+}
         body {
     align-items: flex-start;
     display: flex;
@@ -39,8 +43,9 @@
             cursor: pointer;
             font-family: system-ui;
         }
-        button, input, div, textarea {
+        button, input, div, textarea,a, select,span {
             outline-color: #1e79f0;
+            -webkit-tap-highlight-color: transparent !important;
         }
 
 
@@ -426,7 +431,6 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
     }
     button,a,select {
         user-select: none;
-        cursor: context-menu !important;
     }
 }
     </style>
