@@ -62,27 +62,33 @@
         /* font-family: system-ui; */
         direction: rtl;
         text-align: center;
+        overflow-y: auto;
     }
     .omg {
         width: 100%;
         display: flex;
         justify-content: center;
         margin-top: 20px;
-        position: absolute;
+        /* position: absolute; */
         bottom: 8px;
     }
     .prayer-times-container {
         margin-top: 54px;
     }
     .prayer-countdown-timer {
-        font-size: 2em;
-        margin-top: 10px;
-        color: #ff0000;
-    }
+    font-size: 2.7em;
+    margin-top: 10px;
+    color: #ff0000;
+    margin-bottom: 5px;
+}
     .prayer-times-table {
-        border-collapse: collapse;
-        margin: 20px 10px;
-        width: -webkit-fill-available;
+border-collapse: collapse;
+    margin: 20px 10px;
+    margin-top: 10px;
+    width: -webkit-fill-available;
+    font-size: 18px;
+    }
+    .next-prayer-time-display {
         font-size: 16px;
     }
     .prayer-times-header, .prayer-times-data {
@@ -381,6 +387,9 @@
     @media (max-width: 768px) {
         body { user-select: none; }
         button, a, select { user-select: none; }
+    }
+    tbody td {
+
     }
     </style>
 </head>
