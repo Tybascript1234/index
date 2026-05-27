@@ -3,451 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quran recited AI</title>
+    <title>أوقات الصلاة</title>
     <link rel="icon" href="image/mosque.png">
-    <!-- الأذان -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" />
-
 </head>
 <body>
     <style>
-
     * {
-    -webkit-tap-highlight-color: transparent;
-}
-        body {
-    align-items: flex-start;
-    display: flex;
-    overflow: hidden;
-    font-size: 14px;
-    width: 100%;
-    height: 100dvh;
-    background-color: #00000000;
-    margin: 0;
-        }
-        /* أضف أنماطًا لـ div حسب الحاجة */
-        #myDivas { 
-    align-items: flex-end;
-    display: flex;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-    background-color: #00000000;
-        }
-        button {
-            cursor: pointer;
-            font-family: system-ui;
-        }
-        button, input, div, textarea,a, select,span {
-            outline-color: #1e79f0;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-
-
-        /* الكود */
-
-
-gol {
-    height: 1px;
-    background-color: #f6f7f9;
-    width: -webkit-fill-available;
-    display: block;
-}
-.prayer-timesa gol {
-    background-color: #ebedf1;
-    margin: 4px 0;
-}
-    .prayer-container {
-    font-family: system-ui;
-    direction: rtl;
-    text-align: center;
-    /* height: 96%; */
-}
-.prayer-timesa gol {
-    background-color: #ebedf1;
-    margin: 4px 0;
-}
-.omg {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    position: absolute;
-    bottom: 8px;
-}
-.prayer-times-container {
-    margin-top: 54px;
-}
-.prayer-countdown-timer {
-    font-size: 2em;
-    margin-top: 10px;
-    color: #ff0000;
-}
-.prayer-times-table {
-    border-collapse: collapse;
-    margin: 20px 10px;
-    width: -webkit-fill-available;
-}
-.prayer-times-header, .prayer-times-data {
-    padding: 10px;
-    border-top: 1px solid #dadada;
-    border-bottom: 1px solid #dadada;
-    text-align: center;
-}
-.highlighted-next-prayer {
-    font-weight: 500;
-    background-color: #faf2d7;
-    color: #d1b75c;
-}
-.dropdown-selector::-webkit-scrollbar {
-    width: 5px;
-}
-.dropdown-selector::-webkit-scrollbar-thumb {
-    background: #b8b8b85d;
-    border-radius: 10px;
-}
-.dropdown-selector::-webkit-scrollbar-track {
-    background: #f1f1f100;
-    border-radius: 10px;
-}
-.generic-button {
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.generic-button:hover {
-    background-color: #45a049;
-}
-.adhan-alert-container {
-    display: none;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffdddd;
-    padding: 20px;
-    border: 2px solid #f00;
-    border-radius: 10px;
-    z-index: 1000;
-}
-.c-sec {
-    scrollbar-width: none;
-    transition: ease 0.2s;
-    padding: 10px;
-    height: 60px;
-    width: 278px;
-    resize: none;
-    border: solid 1px;
-    border-radius: 7px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-.c-sec:focus {
-    box-shadow: 0 0 0 5px #dfecff;
-    border: solid 1px #1e6ee3;;
-}
-
-
-
-
-        /* Prayer times */
-        img {
-            user-select: none;
-            -webkit-user-drag: none;
-        }
-.Prayer-times {
-    position: relative;
-    font-family: system-ui;
-    /* direction: rtl; */
-    animation: show-buttons 0.3s;
-    padding: 0 10px;
-    background-color: #ffffffd6;
-    backdrop-filter: blur(21px);
-    border-radius: 0;
-    width: 100%;
-    height: 100%;
-    max-width: -webkit-fill-available;
-    box-shadow: none;
-}
-.Prayer-image {
-    z-index: 110;
-    position: absolute;
-    margin: auto;
-    top: -50px;
-    padding: 8px;
-    background-color: white;
-    border-radius: 50%;
-    transform: translate(-50%);
-    left: 50%;
-    overflow: hidden;
-    display: none;
-    box-shadow: 0 0px 5px 0px rgba(60, 64, 67, .15);
-}
-.Prayer-image img {
-    height: 77px;
-    border-radius: 50%;
-    border: solid 1px #cccccc33;
-    display: block;
-}
-.prayer-timesa {
-    margin-top: 50px;
-    height: -webkit-fill-available;
-}
-.times-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 10px;
-    border-radius: 50%;
-    height: 36px;
-    width: 36px;
-    border: none;
-    color: #677483;
-    background-color: #f6f7f9;
-}
-.times-button:active {
-    background-color: #e8eaec;
-}
-.times-button span {
-    font-size: 23px;
-}
-.prayer-menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 3;
-    box-shadow: 0px 18px 8px #fff;
-}
-.prayer-menu button {
-    transition: ease 0.2s;
-    border: none;
-    margin: 0 4px;
-    border-radius: 10px;
-    height: 31px;
-    padding: 0 13px;
-    color: #d1b75c;
-    background: #faf2d7;
-}
-.prayer-menu button:active {
-    background: #f3e9ca;
-}
-.prayer-menu button.active {
-    background-color: #e3c765;
-    color: white;
-  }
-
-.prayer-div {
-    height: 92%;
-    overflow-y: hidden;
-    scrollbar-width: none;
-}
-.prayer-div-div { 
-    position: relative;
-    text-align: center;
-    margin-bottom: 3px;
-    height: 100%;
-    overflow-y: auto;
-}
-.prayer-div-div .ss {
-    text-align: center;
-    user-select: none;
-    display: block;
-    margin: 13px 0;
-    font-size: 16px;
-    font-family: system-ui;
-}
-.good {
-    position: absolute;
-    width: max-content;
-    user-select: none;
-    color: #ccc;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    padding: 16px;
-}
-.prayer-div-list {
-    font-family: system-ui;
-    color: #9c916a;
-    text-align: right;
-    font-size: 18px;
-    position: relative;
-    overflow: hidden;
-    padding: 10px 20px;
-    /* height: 60px; */
-    margin: 10px;
-    margin-top: 0;
-    border-radius: 12px;
-    box-shadow: 0px 1px 3px #0000000f;
-}
-.prayer-div-list::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 5px;
-    background-color: #faf2d7;
-}
-.prayer-div-list a {
-    font-weight: 600;
-    color: #d1b75c;
-}
-.prayer-div-div::-webkit-scrollbar {
-    width: 3px;
-}
-.prayer-div-div::-webkit-scrollbar:hover {
-    width: 5px;
-}
-.prayer-div-div::-webkit-scrollbar-thumb {
-    background: #b8b8b85d;
-    border-radius: 10px;
-}
-body .select2-container--default .select2-results__option::-webkit-scrollbar-track {
-    background: #f1f1f100;
-    border-radius: 10px;
-}
-.prayer-div-div:hover::-webkit-scrollbar-thumb {
-    background: #c9c9c9;
-}
-#iframe2 {
-    box-shadow: 0px 4px 0px #fff inset;
-    border-radius: 2px;
-    background: rgb(255, 255, 255);
-    border: none;
-    width: 100%;
-    overflow: hidden;
-    height: 445px;
-    position: relative;
-    z-index: 5;
-}
-#country,#city,#fetch-times {
-    cursor: pointer;
-    outline: none;
-    border: none;
-    padding: 5px;
-    color: #677483;
-    background-color: #f6f7f9;
-    margin: 4px;
-    border-radius: 8px;
-}
-#lolo {
-    box-shadow: 0px 1px 0px #f6f7f9;
-    padding-bottom: 3px;
-    padding-top: 4px;
-    justify-content: center;
-    flex-wrap: wrap;
-    display: flex;
-    position: sticky;
-    z-index: 5;
-    top: 0;
-    background: white;
-    text-align: -webkit-center;
-}
-#message {
-    position: absolute;
-    display: none;
-    margin: auto;
-    bottom: 72px;
-    z-index: 10;
-    padding: 8px;
-    border-radius: 8px;
-    color: #677483;
-    background-color: #f6f7f9da;
-    box-shadow: 0px 1px 3px #00000017, 0px 1px 2px #cccccc44;
-    /* backdrop-filter: blur(3px); */
-    left: 50%;
-    transform: translate(-50%);
-}
-.goool {
-    user-select: none;
-    border-radius: 10px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    background-color: #000000ab;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-.goool-div {
-    text-shadow: 0px 1px 7px #000;
-    justify-content: center;
-    flex-wrap: wrap;
-    display: flex;
-    color: white;
-}
-.goool-div img {
-    width: 181px;
-}
-.goool-div2 {
-    width: -webkit-fill-available;
-    margin: 0px 40px;
-    margin-top: 160px;
-    text-align: center;
-}
-.goool-div2 button {
-    height: 54px;
-    width: 54px;
-    border: none;
-    border-radius: 50px;
-    background: #ff6262;
-    color: white;
-    box-shadow: 0px 2px 7px #00000056;
-}
-
-
-/* ripple-btn */
-.ripple-btn{
-    position: relative;
-    overflow: hidden;
-    transition: ease 0.1s;
-}
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    background-color: #ffffff46;
-    transform: scale(0);
-    animation: ripple-animation 0.6s linear;
-}
-@keyframes ripple-animation {
-    to {
-        transform: scale(4);
-        opacity: 0;
+        -webkit-tap-highlight-color: transparent;
     }
-}
-@media (max-width: 768px) {
     body {
-        user-select: none;
+        align-items: flex-start;
+        display: flex;
+        overflow: hidden;
+        font-size: 14px;
+        width: 100%;
+        height: 100dvh;
+        background-color: #00000000;
+        margin: 0;
     }
-    button,a,select {
-        user-select: none;
+    #myDivas {
+        align-items: flex-end;
+        display: flex;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        background-color: #00000000;
     }
-}
+    button {
+        cursor: pointer;
+        font-family: system-ui;
+    }
+    button, input, div, textarea, a, select, span {
+        outline-color: #1e79f0;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    gol {
+        height: 1px;
+        background-color: #f6f7f9;
+        width: -webkit-fill-available;
+        display: block;
+    }
+    .prayer-timesa gol {
+        background-color: #ebedf1;
+        margin: 4px 0;
+    }
+    .prayer-container {
+        font-family: system-ui;
+        direction: rtl;
+        text-align: center;
+    }
+    .omg {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        position: absolute;
+        bottom: 8px;
+    }
+    .prayer-times-container {
+        margin-top: 54px;
+    }
+    .prayer-countdown-timer {
+        font-size: 2em;
+        margin-top: 10px;
+        color: #ff0000;
+    }
+    .prayer-times-table {
+        border-collapse: collapse;
+        margin: 20px 10px;
+        width: -webkit-fill-available;
+    }
+    .prayer-times-header, .prayer-times-data {
+        padding: 10px;
+        border-top: 1px solid #dadada;
+        border-bottom: 1px solid #dadada;
+        text-align: center;
+    }
+    .highlighted-next-prayer {
+        font-weight: 500;
+        background-color: #faf2d7;
+        color: #d1b75c;
+    }
+    .dropdown-selector::-webkit-scrollbar { width: 5px; }
+    .dropdown-selector::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
+    .dropdown-selector::-webkit-scrollbar-track { background: #f1f1f100; border-radius: 10px; }
+    .generic-button {
+        padding: 10px 20px;
+        margin: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .generic-button:hover { background-color: #45a049; }
+    .adhan-alert-container {
+        display: none;
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffdddd;
+        padding: 20px;
+        border: 2px solid #f00;
+        border-radius: 10px;
+        z-index: 1000;
+    }
+    .c-sec {
+        scrollbar-width: none;
+        transition: ease 0.2s;
+        padding: 10px;
+        height: 60px;
+        width: 278px;
+        resize: none;
+        border: solid 1px;
+        border-radius: 7px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+    .c-sec:focus {
+        box-shadow: 0 0 0 5px #dfecff;
+        border: solid 1px #1e6ee3;
+    }
+
+    img {
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+    .Prayer-times {
+        position: relative;
+        font-family: system-ui;
+        animation: show-buttons 0.3s;
+        padding: 0 10px;
+        background-color: #ffffffd6;
+        backdrop-filter: blur(21px);
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        max-width: -webkit-fill-available;
+        box-shadow: none;
+    }
+    .Prayer-image {
+        z-index: 110;
+        position: absolute;
+        margin: auto;
+        top: -50px;
+        padding: 8px;
+        background-color: white;
+        border-radius: 50%;
+        transform: translate(-50%);
+        left: 50%;
+        overflow: hidden;
+        display: none;
+        box-shadow: 0 0px 5px 0px rgba(60, 64, 67, .15);
+    }
+    .Prayer-image img {
+        height: 77px;
+        border-radius: 50%;
+        border: solid 1px #cccccc33;
+        display: block;
+    }
+    .prayer-timesa {
+        margin-top: 50px;
+        height: -webkit-fill-available;
+    }
+    .times-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 10px;
+        border-radius: 50%;
+        height: 36px;
+        width: 36px;
+        border: none;
+        color: #677483;
+        background-color: #f6f7f9;
+    }
+    .times-button:active { background-color: #e8eaec; }
+    .times-button span { font-size: 23px; }
+    .prayer-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0px 18px 8px #fff;
+    }
+    .prayer-menu button {
+        transition: ease 0.2s;
+        border: none;
+        margin: 0 4px;
+        border-radius: 10px;
+        height: 31px;
+        padding: 0 13px;
+        color: #d1b75c;
+        background: #faf2d7;
+    }
+    .prayer-menu button:active { background: #f3e9ca; }
+    .prayer-menu button.active {
+        background-color: #e3c765;
+        color: white;
+    }
+    .prayer-div {
+        height: 92%;
+        overflow-y: hidden;
+        scrollbar-width: none;
+    }
+    .prayer-div-div {
+        position: relative;
+        text-align: center;
+        margin-bottom: 3px;
+        height: 100%;
+        overflow-y: auto;
+    }
+    .prayer-div-div .ss {
+        text-align: center;
+        user-select: none;
+        display: block;
+        margin: 13px 0;
+        font-size: 16px;
+        font-family: system-ui;
+    }
+    .good {
+        position: absolute;
+        width: max-content;
+        user-select: none;
+        color: #ccc;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+        padding: 16px;
+    }
+    .prayer-div-list {
+        font-family: system-ui;
+        color: #9c916a;
+        text-align: right;
+        font-size: 18px;
+        position: relative;
+        overflow: hidden;
+        padding: 10px 20px;
+        margin: 10px;
+        margin-top: 0;
+        border-radius: 12px;
+        box-shadow: 0px 1px 3px #0000000f;
+    }
+    .prayer-div-list::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 5px;
+        background-color: #faf2d7;
+    }
+    .prayer-div-list a {
+        font-weight: 600;
+        color: #d1b75c;
+    }
+    .prayer-div-div::-webkit-scrollbar { width: 3px; }
+    .prayer-div-div::-webkit-scrollbar:hover { width: 5px; }
+    .prayer-div-div::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
+    .prayer-div-div:hover::-webkit-scrollbar-thumb { background: #c9c9c9; }
+
+    #iframe2 {
+        box-shadow: 0px 4px 0px #fff inset;
+        border-radius: 2px;
+        background: rgb(255, 255, 255);
+        border: none;
+        width: 100%;
+        overflow: hidden;
+        height: 445px;
+        position: relative;
+        z-index: 5;
+    }
+    #country, #city, #fetch-times {
+        cursor: pointer;
+        outline: none;
+        border: none;
+        padding: 5px;
+        color: #677483;
+        background-color: #f6f7f9;
+        margin: 4px;
+        border-radius: 8px;
+    }
+    #lolo {
+        box-shadow: 0px 1px 0px #f6f7f9;
+        padding-bottom: 3px;
+        padding-top: 4px;
+        justify-content: center;
+        flex-wrap: wrap;
+        display: flex;
+        position: sticky;
+        z-index: 5;
+        top: 0;
+        background: white;
+        text-align: -webkit-center;
+    }
+    #message {
+        position: absolute;
+        display: none;
+        margin: auto;
+        bottom: 72px;
+        z-index: 10;
+        padding: 8px;
+        border-radius: 8px;
+        color: #677483;
+        background-color: #f6f7f9da;
+        box-shadow: 0px 1px 3px #00000017, 0px 1px 2px #cccccc44;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .goool {
+        user-select: none;
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background-color: #000000ab;
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+    .goool-div {
+        text-shadow: 0px 1px 7px #000;
+        justify-content: center;
+        flex-wrap: wrap;
+        display: flex;
+        color: white;
+    }
+    .goool-div img { width: 181px; }
+    .goool-div2 {
+        width: -webkit-fill-available;
+        margin: 0px 40px;
+        margin-top: 160px;
+        text-align: center;
+    }
+    .goool-div2 button {
+        height: 54px;
+        width: 54px;
+        border: none;
+        border-radius: 50px;
+        background: #ff6262;
+        color: white;
+        box-shadow: 0px 2px 7px #00000056;
+    }
+
+    .ripple-btn {
+        position: relative;
+        overflow: hidden;
+        transition: ease 0.1s;
+    }
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background-color: #ffffff46;
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+    }
+    @keyframes ripple-animation {
+        to { transform: scale(4); opacity: 0; }
+    }
+    @media (max-width: 768px) {
+        body { user-select: none; }
+        button, a, select { user-select: none; }
+    }
     </style>
 </head>
 <body>
 
-        <div id="myDivas">
-        <!-- Prayer times -->
+    <div id="myDivas">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-         <div class="Prayer-times prayer-times-container" id="settingsDiv">
-            <!-- onclick="getLocation()" -->
+        <div class="Prayer-times prayer-times-container" id="settingsDiv">
             <button onclick="scrollToDiv('section-4', this)" class="material-symbols-outlined times-button"><span>code</span></button>
             <div class="Prayer-image cor"><img src="image/mosque.png" alt=""></div>
             <div class="prayer-timesa">
@@ -458,50 +396,47 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                 </div>
                 <div class="prayer-div">
                     <div id="section-1" class="prayer-div-div section">
-
-                        <!-- ديف يحتوي على أوقات الصلاة وزر لإغلاقه -->
                         <div class="prayer-container">
                             <div class="">
-                                <h2 class="selected-location-title" id="date">0/0/0000</h2>
-                                <div class="prayer-countdown-timer">00:00:00</div>
-                                <div class="next-prayer-time-display">متبقي على الصلاة القادمة: <span class="next-prayer-time">م 5:45</span></div>
+                                <h2 class="selected-location-title" id="date">٠/٠/٠٠٠٠</h2>
+                                <div class="prayer-countdown-timer">٠٠:٠٠:٠٠</div>
+                                <div class="next-prayer-time-display">متبقي على الصلاة القادمة: <span class="next-prayer-time">--:--</span></div>
                                 <table class="prayer-times-table">
                                     <thead>
-                                    <tr>
-                                        <th style="border-top-color: #00000000;" class="prayer-times-header">الصلاة</th>
-                                        <th style="border-top-color: #00000000;" class="prayer-times-header">الوقت</th>
-                                    </tr>
+                                        <tr>
+                                            <th style="border-top-color: #00000000;" class="prayer-times-header">الصلاة</th>
+                                            <th style="border-top-color: #00000000;" class="prayer-times-header">الوقت</th>
+                                        </tr>
                                     </thead>
                                     <tbody class="prayer-times-body">
-                                    <tr class="fajr-prayer-row">
-                                        <td class="prayer-times-data">الفجر</td>
-                                        <td class="fajr-time prayer-times-data">ص 4:27</td>
-                                    </tr>
-                                    <tr class="sunrise-prayer-row">
-                                        <td class="prayer-times-data">الشروق</td>
-                                        <td class="sunrise-time prayer-times-data">ص 5:50</td>
-                                    </tr>
-                                    <tr class="dhuhr-prayer-row">
-                                        <td class="prayer-times-data">الظهر</td>
-                                        <td class="dhuhr-time prayer-times-data">ص 11:43</td>
-                                    </tr>
-                                    <tr class="asr-prayer-row">
-                                        <td class="prayer-times-data">العصر</td>
-                                        <td class="asr-time prayer-times-data">م 3:07</td>
-                                    </tr>
-                                    <tr class="maghrib-prayer-row">
-                                        <td class="prayer-times-data">المغرب</td>
-                                        <td class="maghrib-time prayer-times-data">م 5:45</td>
-                                    </tr>
-                                    <tr class="isha-prayer-row">
-                                        <td style="border-bottom-color: #00000000;" class="prayer-times-data">العشاء</td>
-                                        <td style="border-bottom-color: #00000000;" class="isha-time prayer-times-data">م 7:15</td>
-                                    </tr>
+                                        <tr class="fajr-prayer-row">
+                                            <td class="prayer-times-data">الفجر</td>
+                                            <td class="fajr-time prayer-times-data">--:--</td>
+                                        </tr>
+                                        <tr class="sunrise-prayer-row">
+                                            <td class="prayer-times-data">الشروق</td>
+                                            <td class="sunrise-time prayer-times-data">--:--</td>
+                                        </tr>
+                                        <tr class="dhuhr-prayer-row">
+                                            <td class="prayer-times-data">الظهر</td>
+                                            <td class="dhuhr-time prayer-times-data">--:--</td>
+                                        </tr>
+                                        <tr class="asr-prayer-row">
+                                            <td class="prayer-times-data">العصر</td>
+                                            <td class="asr-time prayer-times-data">--:--</td>
+                                        </tr>
+                                        <tr class="maghrib-prayer-row">
+                                            <td class="prayer-times-data">المغرب</td>
+                                            <td class="maghrib-time prayer-times-data">--:--</td>
+                                        </tr>
+                                        <tr class="isha-prayer-row">
+                                            <td style="border-bottom-color: #00000000;" class="prayer-times-data">العشاء</td>
+                                            <td style="border-bottom-color: #00000000;" class="isha-time prayer-times-data">--:--</td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                            
                             </div>
-                        
+
                             <div class="omg">
                                 <select onchange="handleCountryChange(this)" class="dropdown-selector custom-select mySelect" style="width: 150px;">
                                     <option value="">اختر الدولة</option>
@@ -512,14 +447,14 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                             </div>
                         </div>
                     </div>
-                     <!-- 1 -->
-                     <div class="prayer-div-div section" id="section-2">
+
+                    <!-- اذكار -->
+                    <div class="prayer-div-div section" id="section-2">
                         <span class="ss">اذكار الصباح</span>
                         <div class="prayer-div-list">
                             <a>أعوذ بالله من الشيطان الرجيم</a>
                             <gol></gol>
-                            اللّهُ لا إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لا تَأْخُذُهُ سِنَةٌ وَلا نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ.
-                            (البقرة: 255)
+                            اللّهُ لا إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لا تَأْخُذُهُ سِنَةٌ وَلا نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ. (البقرة: 255)
                             <gol></gol>
                             <a>بسم الله الرحمن الرحيم</a>
                             <gol></gol>
@@ -531,13 +466,13 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                             <gol></gol>
                             أصبحنا وأصبح الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، ربِّ أسألك خير ما في هذا اليوم وخير ما بعده، وأعوذ بك من شر ما في هذا اليوم وشر ما بعده، ربِّ أعوذ بك من الكسل وسوء الكبر، ربِّ أعوذ بك من عذاب في النار وعذاب في القبر. (مرة واحدة)
                             <gol></gol>
-                            اللهم بك أصبحنا وبك أمسينا، وبك نحيا وبك نموت وإليك النشور. (مرة واحدة)</div>
+                            اللهم بك أصبحنا وبك أمسينا، وبك نحيا وبك نموت وإليك النشور. (مرة واحدة)
+                        </div>
                         <span class="ss">اذكار المساء</span>
                         <div class="prayer-div-list">
                             <a>أعوذ بالله من الشيطان الرجيم</a>
                             <gol></gol>
-                            اللّهُ لا إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لا تَأْخُذُهُ سِنَةٌ وَلا نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ.
-                            (البقرة: 255)
+                            اللّهُ لا إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لا تَأْخُذُهُ سِنَةٌ وَلا نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ. (البقرة: 255)
                             <gol></gol>
                             <a>بسم الله الرحمن الرحيم</a>
                             <gol></gol>
@@ -550,7 +485,7 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                             أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، ربِّ أسألك خير ما في هذه الليلة وخير ما بعدها، وأعوذ بك من شر ما في هذه الليلة وشر ما بعدها، ربِّ أعوذ بك من الكسل وسوء الكبر، ربِّ أعوذ بك من عذاب في النار وعذاب في القبر. (مرة واحدة)
                             <gol></gol>
                             اللهم بك أمسينا وبك أصبحنا، وبك نحيا وبك نموت وإليك المصير. (مرة واحدة)
-                            </div>
+                        </div>
                         <span class="ss">اذكار بعد الصلاة</span>
                         <div class="prayer-div-list">
                             <a>الاستغفار ثلاث مرات</a>
@@ -581,11 +516,12 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                             <gol></gol>
                             "اللهم أعني على ذكرك وشكرك وحسن عبادتك"
                             <gol></gol>
-                            هذه الأذكار من السنن المستحبة بعد كل صلاة، ومن الأفضل المواظبة عليها لتنال الأجر والثواب    
+                            هذه الأذكار من السنن المستحبة بعد كل صلاة، ومن الأفضل المواظبة عليها لتنال الأجر والثواب
                         </div>
-                     </div>
-                    <!-- 2 -->
-                     <div id="section-3" class="prayer-div-div section">
+                    </div>
+
+                    <!-- ادعية -->
+                    <div id="section-3" class="prayer-div-div section">
                         <span class="ss">ادعيه</span>
                         <div class="prayer-div-list copyable" style="margin-top: 10px;">اللهم إني أسألك العفو والعافية في الدنيا والآخرة</div>
                         <div class="prayer-div-list copyable">اللهم ارزقني رزقًا حلالًا طيبًا واسعًا مباركًا فيه</div>
@@ -597,70 +533,80 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                         <div class="prayer-div-list copyable">اللهم إني أسألك من الخير كله عاجله وآجله ما علمت منه وما لم أعلم</div>
                         <div class="prayer-div-list copyable">اللهم يا مقلب القلوب ثبت قلبي على دينك</div>
                         <div class="prayer-div-list copyable">اللهم ارزقني حسن الخاتمة واغفر لي ولوالدي وللمسلمين أجمعين</div>
-                     </div>
-                     <!-- 4 -->
-                     <div id="section-4" class="prayer-div-div section">
+                    </div>
+
+                    <!-- iframe -->
+                    <div id="section-4" class="prayer-div-div section">
                         <span class="ss">< iframe > التضمين بموقعك</span>
                         <textarea readonly class="c-sec copyable"><iframe src="file:///C:/Users/Lenovo/OneDrive/Desktop/Chat%20[%20Eyad%20]/noon/noon.html" frameborder="0"></iframe></textarea>
                         <gol></gol>
                         <span class="ss">🤲 هاذا ماتيسر لا تنسنا من صالح دعائك</span>
                         <div class="good cor">اخر إصدار عام ,10/1/2024م<br><span><a href="#" style="text-decoration: none;color: #4d4d4d;">Quran recited AI</a> جميع الحقوق محفوظة لدى</span></div>
-                     </div>
-                    
+                    </div>
                 </div>
             </div>
             <p id="message"></p>
-            <!-- --- -->
-             <div class="goool" id="adhan-alert-container">
+            <div class="goool" id="adhan-alert-container">
                 <audio id="adhan-audio" src="image/019--1.mp3"></audio>
                 <div class="goool-div">
-                    <div>
-                        <img src="image/set-diet-sound-bars.gif" alt="">
-                    </div>
-                    <div>
-                        <h3>لقد حان وقت الأذان اذهب الى الصلاة</h3>
-                    </div>
+                    <div><img src="image/set-diet-sound-bars.gif" alt=""></div>
+                    <div><h3>لقد حان وقت الأذان اذهب الى الصلاة</h3></div>
                     <div class="goool-div2">
                         <button class="material-symbols-outlined ripple-btn close-button" onclick="closeAdhanAlert()" onmousedown="createRipple(event)">close</button>
                     </div>
                 </div>
-             </div>
-         </div>
-</div>
+            </div>
+        </div>
+    </div>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-    
     <script>
-    $(document).ready(function() {
+    // ========== دالة تحويل الأرقام إلى عربية ==========
+    function toArabicNumerals(str) {
+        if (!str) return str;
+        return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    }
+
+    // ========== تحويل الوقت من HH:mm إلى صيغة ص/م بأرقام عربية ==========
+    function formatTimeArabic(timeStr) {
+        if (!timeStr || timeStr === '--:--') return '--:--';
+        const parts = timeStr.split(':');
+        let hours = parseInt(parts[0], 10);
+        const minutes = parseInt(parts[1], 10);
+        const period = hours >= 12 ? 'م' : 'ص';
+        hours = hours % 12 || 12;
+        const hStr = toArabicNumerals(String(hours).padStart(2, '0'));
+        const mStr = toArabicNumerals(String(minutes).padStart(2, '0'));
+        return `${hStr}:${mStr} ${period}`;
+    }
+
+    // ========== select2 مع منع الفوكس التلقائي ==========
+    $(document).ready(function () {
         $('.mySelect').select2({
             placeholder: "اختر من القائمة",
             allowClear: true
         });
 
         // منع الفوكس التلقائي على خانة البحث عند فتح القائمة
-        $(document).on('select2:open', function() {
-            // لا نضع focus على حقل البحث — نتركه بدون autofocus
-            // إزالة autofocus من حقل البحث المُنشأ ديناميكياً
-            setTimeout(function() {
-                let searchField = document.querySelector('.select2-container--open .select2-search__field');
+        $(document).on('select2:open', function () {
+            // إزالة الفوكس من حقل البحث فوراً
+            setTimeout(function () {
+                const searchField = document.querySelector('.select2-container--open .select2-search__field');
                 if (searchField) {
                     searchField.blur();
                 }
             }, 0);
         });
 
-        // ضبط placeholder لحقل البحث داخل select2
-        $('.mySelect').on('select2:open', function() {
+        $('.mySelect').on('select2:open', function () {
             let selectedOption = $(this).find(':selected').text();
-            setTimeout(function() {
+            setTimeout(function () {
                 let searchField = document.querySelector('.select2-container--open .select2-search__field');
                 if (searchField) {
-                    searchField.setAttribute('placeholder', selectedOption && selectedOption !== 'اختر من القائمة' ? selectedOption : 'ابحث هنا');
+                    searchField.setAttribute('placeholder', selectedOption || 'ابحث هنا');
                     searchField.blur();
                 }
             }, 0);
@@ -668,395 +614,312 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
     });
     </script>
 
-
-
     <script>
+    // ========== Prayer times logic ==========
+    let countdownTimeout = null;
+    let adhanTimeout = null;
 
-// Prayer times
-
-let activeButton = null;
-
-function scrollToDiv(divId, button) {
-  const element = document.getElementById(divId);
-  element.scrollIntoView({ behavior: 'smooth' });
-
-  // إعادة اللون الأصلي للزرار السابق
-  if (activeButton) {
-    activeButton.classList.remove('active');
-  }
-
-  // تفعيل الزر الحالي
-  button.classList.add('active');
-  activeButton = button;
-}
-
-// إضافة الكلاس ripple-btn وحدث onmousedown تلقائيًا وتفعيل أول زر من اليمين
-document.addEventListener('DOMContentLoaded', function() {
-  const buttons = document.querySelectorAll('.prayer-menu button');
-
-  // تفعيل آخر زر عند تحميل الصفحة (أول زر من ناحية اليمين)
-  if (buttons.length > 0) {
-    const lastButton = buttons[buttons.length - 1];
-    lastButton.classList.add('active');
-    activeButton = lastButton;
-  }
-
-  // إضافة كلاس ripple-btn وonmousedown لكل زر
-  buttons.forEach(button => {
-    button.classList.add('ripple-btn');
-    button.setAttribute('onmousedown', 'createRipple(event)');
-  });
-});
-
-
-// متموج
-function createRipple(event) {
-    const button = event.currentTarget;
-    const ripple = document.createElement("span");
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
-  
-    ripple.style.width = ripple.style.height = `${size}px`;
-    ripple.style.left = x + "px";
-    ripple.style.top = y + "px";
-  
-    ripple.classList.add("ripple");
-  
-    button.appendChild(ripple);
-  
-    setTimeout(() => {
-      ripple.remove();
-    }, 600);
-  }
-    </script>
-
-
-<!-- script (mosque.js) -->
-<script>
-let countdownTimeout;
-let adhanTimeout;
-
-// ===== تحويل الوقت من HH:mm إلى صيغة عربية (ص/م) =====
-function formatArabicTime(timeStr) {
-    if (!timeStr) return '';
-    // timeStr مثل "04:27" أو "17:45"
-    const parts = timeStr.split(':');
-    if (parts.length < 2) return timeStr;
-    let hours = parseInt(parts[0], 10);
-    const minutes = parts[1];
-    const suffix = hours < 12 ? 'ص' : 'م';
-    if (hours === 0) hours = 12;
-    else if (hours > 12) hours = hours - 12;
-    return `${suffix} ${hours}:${minutes}`;
-}
-
-// حفظ البيانات في LocalStorage
-function saveToLocalStorage(country, city, timings) {
-    localStorage.setItem('selectedCountry', country);
-    localStorage.setItem('selectedCity', city);
-    localStorage.setItem('prayerTimings', JSON.stringify(timings));
-}
-
-// استرجاع البيانات من LocalStorage
-function loadFromLocalStorage() {
-    const savedCountry = localStorage.getItem('selectedCountry');
-    const savedCity = localStorage.getItem('selectedCity');
-    const savedTimings = JSON.parse(localStorage.getItem('prayerTimings'));
-    return { savedCountry, savedCity, savedTimings };
-}
-
-// تحديث الـ UI بناءً على القيم المحفوظة — مع select2
-function updateUIFromLocalStorage() {
-    const { savedCountry, savedCity, savedTimings } = loadFromLocalStorage();
-    const container = document.querySelector('.prayer-container');
-
-    if (savedCountry) {
-        const countrySelect = container.querySelector('select:nth-of-type(1)');
-        // تعيين القيمة وتحديث select2
-        $(countrySelect).val(savedCountry).trigger('change');
-        populateCities(savedCountry, container.querySelector('select:nth-of-type(2)'));
+    function saveToLocalStorage(country, city, timings) {
+        localStorage.setItem('selectedCountry', country);
+        localStorage.setItem('selectedCity', city);
+        localStorage.setItem('prayerTimings', JSON.stringify(timings));
     }
 
-    if (savedCity) {
-        // ننتظر قليلاً حتى تنتهي populateCities من إضافة الخيارات
-        setTimeout(function() {
-            const citySelect = container.querySelector('select:nth-of-type(2)');
-            $(citySelect).val(savedCity).trigger('change');
-        }, 100);
+    function loadFromLocalStorage() {
+        const savedCountry = localStorage.getItem('selectedCountry');
+        const savedCity = localStorage.getItem('selectedCity');
+        const savedTimings = JSON.parse(localStorage.getItem('prayerTimings'));
+        return { savedCountry, savedCity, savedTimings };
     }
 
-    if (savedTimings) {
-        container.querySelector('.fajr-time').textContent    = formatArabicTime(savedTimings.Fajr);
-        container.querySelector('.sunrise-time').textContent = formatArabicTime(savedTimings.Sunrise);
-        container.querySelector('.dhuhr-time').textContent   = formatArabicTime(savedTimings.Dhuhr);
-        container.querySelector('.asr-time').textContent     = formatArabicTime(savedTimings.Asr);
-        container.querySelector('.maghrib-time').textContent = formatArabicTime(savedTimings.Maghrib);
-        container.querySelector('.isha-time').textContent    = formatArabicTime(savedTimings.Isha);
-
-        updateCountdown(savedTimings, container);
+    // تحديث عرض الأوقات في الجدول
+    function displayTimings(timings, container) {
+        container.querySelector('.fajr-time').textContent    = formatTimeArabic(timings.Fajr);
+        container.querySelector('.sunrise-time').textContent = formatTimeArabic(timings.Sunrise);
+        container.querySelector('.dhuhr-time').textContent   = formatTimeArabic(timings.Dhuhr);
+        container.querySelector('.asr-time').textContent     = formatTimeArabic(timings.Asr);
+        container.querySelector('.maghrib-time').textContent = formatTimeArabic(timings.Maghrib);
+        container.querySelector('.isha-time').textContent    = formatTimeArabic(timings.Isha);
     }
-}
 
-function togglePrayerTimes(show) {
-    const prayerTimesDiv = document.querySelector('.prayer-times-container');
-    prayerTimesDiv.style.display = show ? 'flex' : 'none';
-}
+    // استرجاع وعرض البيانات المحفوظة بعد الريلود
+    function updateUIFromLocalStorage(container) {
+        const { savedCountry, savedCity, savedTimings } = loadFromLocalStorage();
 
-const countriesAndCities = {
-    "السعودية": ["الرياض", "جدة", "مكة المكرمة", "المدينة المنورة", "الدمام", "الخبر", "الطائف", "بريدة", "أبها", "تبوك", "حائل", "نجران", "جيزان", "القطيف", "خميس مشيط", "الهفوف", "المبرز", "الظهران", "الجبيل", "ينبع", "حفر الباطن", "سكاكا", "عرعر", "بيشة", "القنفذة", "الباحة", "الوجه", "ضباء", "القريات", "رفحاء", "الزلفي", "الخرج", "المجمعة", "الدوادمي", "شرورة", "حوطة بني تميم", "وادي الدواسر", "رأس تنورة", "الحائط", "السليل", "طريف", "رجال ألمع", "بلجرشي", "تنومة", "أحد رفيدة", "تثليث", "الليث", "العلا", "النماص", "بيش", "العارضة", "سراة عبيدة", "محايل عسير", "الطوال", "الريث", "الدرب", "ظهران الجنوب", "ضمد", "بارق", "تربة", "حبونا", "الخرمة", "المخواة", "القويعية", "مرات", "عفيف", "البدائع", "عنيزة", "الأسياح", "النبهانية", "رياض الخبراء", "الشماسية", "المذنب", "الرس", "البكيرية", "خليص", "رابغ", "الكامل", "بحرة", "ثول", "حريملاء", "العيينة", "الدرعية", "حوطة سدير", "تمير", "ضرما", "المزاحمية", "القويعية", "الحريق", "صامطة", "الدائر", "فيفا", "صبيا", "العيدابي", "وادي الفرع", "الحناكية", "المندق", "القرى", "العقيق", "بلجرشي"],
-    "مصر": ["القاهرة", "الجيزة", "الإسكندرية", "بورسعيد", "السويس", "الإسماعيلية", "دمياط", "المنصورة", "طنطا", "الزقازيق", "بنها", "شبين الكوم", "كفر الشيخ", "دمنهور", "المحلة الكبرى", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر", "أسوان", "الفيوم", "بني سويف", "الغردقة", "شرم الشيخ", "مرسى مطروح", "العريش", "رفح", "الشيخ زويد", "الخارجة", "الداخلة", "سيوة", "نويبع", "طابا", "رأس سدر", "أبو زنيمة", "دهب", "سانت كاترين", "قوص", "إدفو", "أرمنت", "القصير", "سفاجا", "مرسى علم", "بلبيس", "أبو كبير", "أبو حماد", "فاقوس", "الحسينية", "ديرب نجم", "منيا القمح", "ههيا", "كفر صقر", "أولاد صقر", "الصالحية الجديدة", "العاشر من رمضان", "مغاغة", "سمالوط", "مطاي", "أبو قرقاص", "بني مزار", "ملوي", "دير مواس", "منفلوط", "البداري", "ساحل سليم", "أبوتيج", "صدفا", "الغنايم", "جرجا", "البلينا", "طهطا", "طما", "المراغة", "أخميم", "دار السلام", "نجع حمادي", "فرشوط", "دشنا", "الوقف", "قوص", "نقادة", "أرمنت", "كوم أمبو", "نصر النوبة", "دراو", "توشكى", "أبوسمبل", "الفشن", "إهناسيا", "الواسطى", "سمسطا", "ببا", "مطوبس", "فوه", "دسوق", "بيلا", "الحامول", "قلين", "سيدى سالم", "الرياض", "مطوبس"],
-    "الإمارات": ["دبي", "أبو ظبي", "الشارقة", "العين", "رأس الخيمة", "الفجيرة", "أبوظبي", "دبي", "الشارقة", "عجمان", "أم القيوين", "رأس الخيمة", "الفجيرة", "العين", "خورفكان", "دبا الفجيرة", "دبا الحصن", "حتا", "الذيد", "مصفوت", "المدام", "فلج المعلا", "مسافي", "ليوا", "الرويس", "دلما", "المرفأ", "زايد", "السلع", "غياثي", "السلع"],
-    "الكويت": ["مدينة الكويت", "حولي", "الأحمدي", "الفروانية", "الجهراء", "العاصمة", "الأحمدي", "الجهراء", "الفروانية", "حولي", "مبارك الكبير", "السالمية", "الفحيحيل", "صباح السالم", "المنقف", "الرميثية", "خيطان", "بيان", "القرين", "الفنطاس", "الجابرية", "المهبولة", "سلوى", "أبو حليفة", "الزور", "الوفرة", "صباح الأحمد", "المسيلة", "الصليبية", "العارضية", "الصليبخات", "الشويخ", "كبد", "العبدلي", "المسايل", "شرق", "الدسمة", "الدعية", "بنيد القار", "مشرف", "الشعب", "النسيم", "النزهة", "القادسية", "اليرموك", "الفيحاء", "العديلية", "الروضة", "السرة", "الصديق", "حطين", "الظهر", "جابر الأحمد", "مدينة سعد العبد الله"],
-    "قطر": ["الدوحة", "الوكرة", "الخور", "الريان", "العاصمة", "الدوحة", "الريان", "الوكرة", "الخور", "الشحانية", "دخان", "مسيعيد", "زكريت", "أم صلال", "الجميلية", "الغارية", "أبو سمرة", "روضة راشد", "أم باب", "الذخيرة", "السيلية", "اللؤلؤة", "الغرافة", "الوجبة", "المرة", "روضة الجهانية", "لوسيل"],
-    "الجزائر": ["الجزائر العاصمة", "وهران", "قسنطينة", "عنابة", "البليدة", "باتنة", "سطيف", "تيزي وزو", "بشار", "بجاية", "تمنراست", "تلمسان", "ورقلة", "بسكرة", "الجلفة", "المدية", "غرداية", "تبسة", "الشلف", "الأغواط", "عين تموشنت", "سوق أهراس", "معسكر", "المسيلة", "سيدي بلعباس", "عين الدفلى", "برج بوعريريج", "ميلة", "تيارت", "تيسمسيلت", "أدرار", "النعامة", "تيبازة", "جيجل", "سعيدة", "خنشلة", "الوادي", "البيض", "غليزان", "أم البواقي"],
-    "المغرب": ["الرباط", "الدار البيضاء", "مراكش", "فاس", "طنجة", "مكناس", "تطوان", "وجدة", "أغادير", "القنيطرة", "بني ملال", "خريبكة", "الجديدة", "سلا", "آسفي", "تارودانت", "العيون", "الناظور", "الراشيدية", "الحسيمة", "قلعة السراغنة", "الصويرة", "تمارة", "تاونات", "سيدي سليمان", "سيدي قاسم", "المحمدية", "العرائش", "الفقيه بن صالح", "تازة", "القصر الكبير", "الداخلة", "الخميسات", "زاكورة", "ورزازات", "تينغير"],
-    "السودان": ["الخرطوم", "أم درمان", "بحري", "بورتسودان", "كسلا", "الأبيض", "الفاشر", "مدني", "عطبرة", "دنقلا", "كادقلي", "سنار", "الدمازين", "كوستي", "القضارف", "نيالا", "الجنينة", "زالنجي", "ود مدني", "شندي", "الحصاحيصا", "رفاعة", "الرهد", "سواكن", "بارا", "أبو جبيهة", "طوكر", "الدلنج", "بابنوسة", "كريمة"],
-    "سوريا": ["دمشق", "حلب", "حمص", "حماة", "اللاذقية", "طرطوس", "إدلب", "دير الزور", "الحسكة", "الرقة", "السويداء", "درعا", "القنيطرة", "الميادين", "البوكمال", "جبلة", "تل أبيض", "منبج", "إعزاز", "الباب", "صلخد", "دوما", "داريا", "الزبداني", "السلمية", "مصياف", "بانياس", "صافيتا", "المالكية", "عامودا"],
-    "لبنان": ["بيروت", "طرابلس", "صيدا", "صور", "جبيل", "بعلبك", "زحلة", "النبطية", "جونية", "عاليه", "بعبدا", "بشري", "بعقلين", "شتورة", "دير القمر", "تبنين", "حاصبيا", "جب جنين", "راشيا", "بنت جبيل"],
-    "الأردن": ["عمان", "الزرقاء", "إربد", "العقبة", "المفرق", "السلط", "الكرك", "معان", "مادبا", "جرش", "عجلون", "الرمثا", "الطفيلة", "الفحيص", "الصويفية", "دير علا", "الشوبك"],
-    "تونس": ["تونس", "صفاقس", "سوسة", "بنزرت", "قابس", "القيروان", "تونس العاصمة", "سوسة", "صفاقس", "نابل", "قفصة", "المهدية", "القيروان", "بنزرت", "سليانة", "جندوبة", "زغوان", "مدنين", "قبلي", "تطاوين", "المنيهلة"],
-    "العراق": ["بغداد", "البصرة", "الموصل", "أربيل", "النجف", "كربلاء", "دهوك", "السليمانية", "الكوت", "بعقوبة", "سامراء", "الرمادي", "الفلوجة", "تكريت", "الحلة"],
-    "اليمن": ["صنعاء", "عدن", "تعز", "الحديدة", "إب", "حضرموت", "ذمار", "البيضاء", "شبوة", "الجوف", "مأرب", "الضالع", "حجة", "المهرة", "لحج"],
-    "ليبيا": ["طرابلس", "بنغازي", "مصراتة", "سبها", "درنة", "الزاوية", "البيضاء", "جادو", "غريان", "اجدابيا", "زليتن", "الخمس", "ترهونة"],
-    "موريتانيا": ["نواكشوط", "نواذيبو", "كيفه", "روصو", "العيون", "أطار", "أكجوجت", "سيلبابي", "كيهيدي", "تجكجة"],
-    "البحرين": ["المنامة", "المحرق", "الرفاع", "الحد", "سترة", "جد حفص", "عيسى", "الدراز", "البديع", "الزلاق"],
-    "عمان": ["مسقط", "صلالة", "نزوى", "بهلاء", "صور", "البريمي", "صحار", "بركاء", "عبري", "سيت", "دماء والطائيين", "مطرح", "الخابورة", "إبراء", "جعلان بني بو علي", "الرستاق", "الكامل والوافي", "وادي المعاول"],
-    "جيبوتي": ["جيبوتي (العاصمة)", "تاجورة", "علي سابيح", "دوراليه", "قوريولي", "بليلة", "فجر", "دمجلي", "عسل", "أوبوك"],
-    "فلسطين": ["القدس", "رام الله", "نابلس", "بيت لحم", "الخليل", "جنين", "طولكرم", "قلقيلية", "أريحا", "سلفيت", "طوباس", "بيت لحم", "غزة", "خان يونس", "رفح", "دير البلح", "خانيونس", "الشجاعية", "الزوايدة", "النصيرات", "المغازي", "بيت لاهيا"],
-    "الصومال": ["مقديشو (العاصمة)", "بوساسو", "هرجيسا", "جالكعيو", "برعو", "كيسمايو", "بيدوا", "بلدوين", "طوسمريب", "جروي", "ملسو", "طوكر", "لوقا"],
-    "جزر القمر": ["موروني (العاصمة)", "موهيلي", "أنجوان", "جزيرة القمر الكبرى", "نينغوي", "موي"],
-    "إريتريا": ["أسمرة (العاصمة)", "كرن", "مصوع", "نيقلا", "تسني", "بارنتو", "دفني", "عدال"],
-    "جنوب السودان": ["جوبا (العاصمة)", "واو", "ملكال", "بور", "ياي", "ملوال", "جوزي", "رياك", "أروب"]
-};
+        if (savedCountry) {
+            const countrySelect = container.querySelector('select:nth-of-type(1)');
+            // تعيين القيمة في select الأصلي
+            countrySelect.value = savedCountry;
+            // تحديث select2
+            $(countrySelect).val(savedCountry).trigger('change.select2');
+            // تعبئة المدن
+            populateCities(savedCountry, container.querySelector('select:nth-of-type(2)'), function() {
+                if (savedCity) {
+                    const citySelect = container.querySelector('select:nth-of-type(2)');
+                    citySelect.value = savedCity;
+                    $(citySelect).val(savedCity).trigger('change.select2');
+                }
+            });
+        }
 
-
-function handleCountryChange(selectElement) {
-    const selectedCountry = selectElement.value;
-    const citySelect = selectElement.closest('.prayer-container').querySelector('select:nth-of-type(2)');
-    populateCities(selectedCountry, citySelect);
-}
-
-function handleCityChange(selectElement) {
-    const selectedCity = selectElement.value;
-    const selectedCountry = selectElement.closest('.prayer-container').querySelector('select:nth-of-type(1)').value;
-
-    if (selectedCity && selectedCountry) {
-        fetchPrayerTimes(selectedCity, selectedCountry, selectElement);
+        if (savedTimings) {
+            displayTimings(savedTimings, container);
+            updateCountdown(savedTimings, container);
+        }
     }
-}
 
-function populateCountries(selectElement) {
-    for (let country in countriesAndCities) {
-        const option = document.createElement('option');
-        option.value = country;
-        option.textContent = country;
-        selectElement.appendChild(option);
+    const countriesAndCities = {
+        "السعودية": ["الرياض", "جدة", "مكة المكرمة", "المدينة المنورة", "الدمام", "الخبر", "الطائف", "بريدة", "أبها", "تبوك", "حائل", "نجران", "جيزان", "القطيف", "خميس مشيط", "الهفوف", "المبرز", "الظهران", "الجبيل", "ينبع", "حفر الباطن", "سكاكا", "عرعر", "بيشة", "القنفذة", "الباحة", "الوجه", "ضباء", "القريات", "رفحاء", "الزلفي", "الخرج", "المجمعة", "الدوادمي", "شرورة", "حوطة بني تميم", "وادي الدواسر", "رأس تنورة", "الحائط", "السليل", "طريف", "رجال ألمع", "بلجرشي", "تنومة", "أحد رفيدة", "تثليث", "الليث", "العلا", "النماص", "بيش", "العارضة", "سراة عبيدة", "محايل عسير", "الطوال", "الريث", "الدرب", "ظهران الجنوب", "ضمد", "بارق", "تربة", "حبونا", "الخرمة", "المخواة", "القويعية", "مرات", "عفيف", "البدائع", "عنيزة", "الأسياح", "النبهانية", "رياض الخبراء", "الشماسية", "المذنب", "الرس", "البكيرية", "خليص", "رابغ", "الكامل", "بحرة", "ثول", "حريملاء", "العيينة", "الدرعية", "حوطة سدير", "تمير", "ضرما", "المزاحمية", "الحريق", "صامطة", "الدائر", "فيفا", "صبيا", "العيدابي", "وادي الفرع", "الحناكية", "المندق", "القرى", "العقيق", "بلجرشي"],
+        "مصر": ["القاهرة", "الجيزة", "الإسكندرية", "بورسعيد", "السويس", "الإسماعيلية", "دمياط", "المنصورة", "طنطا", "الزقازيق", "بنها", "شبين الكوم", "كفر الشيخ", "دمنهور", "المحلة الكبرى", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر", "أسوان", "الفيوم", "بني سويف", "الغردقة", "شرم الشيخ", "مرسى مطروح", "العريش", "رفح", "الشيخ زويد", "الخارجة", "الداخلة", "سيوة", "نويبع", "طابا", "رأس سدر", "أبو زنيمة", "دهب", "سانت كاترين", "قوص", "إدفو", "أرمنت", "القصير", "سفاجا", "مرسى علم", "بلبيس", "أبو كبير", "أبو حماد", "فاقوس", "الحسينية", "ديرب نجم", "منيا القمح", "ههيا", "كفر صقر", "أولاد صقر", "الصالحية الجديدة", "العاشر من رمضان", "مغاغة", "سمالوط", "مطاي", "أبو قرقاص", "بني مزار", "ملوي", "دير مواس", "منفلوط", "البداري", "ساحل سليم", "أبوتيج", "صدفا", "الغنايم", "جرجا", "البلينا", "طهطا", "طما", "المراغة", "أخميم", "دار السلام", "نجع حمادي", "فرشوط", "دشنا", "الوقف", "قوص", "نقادة", "أرمنت", "كوم أمبو", "نصر النوبة", "دراو", "توشكى", "أبوسمبل", "الفشن", "إهناسيا", "الواسطى", "سمسطا", "ببا", "مطوبس", "فوه", "دسوق", "بيلا", "الحامول", "قلين", "سيدى سالم", "الرياض", "مطوبس"],
+        "الإمارات": ["دبي", "أبو ظبي", "الشارقة", "العين", "رأس الخيمة", "الفجيرة", "أبوظبي", "دبي", "الشارقة", "عجمان", "أم القيوين", "رأس الخيمة", "الفجيرة", "العين", "خورفكان", "دبا الفجيرة", "دبا الحصن", "حتا", "الذيد", "مصفوت", "المدام", "فلج المعلا", "مسافي", "ليوا", "الرويس", "دلما", "المرفأ", "زايد", "السلع", "غياثي", "السلع"],
+        "الكويت": ["مدينة الكويت", "حولي", "الأحمدي", "الفروانية", "الجهراء", "العاصمة", "الأحمدي", "الجهراء", "الفروانية", "حولي", "مبارك الكبير", "السالمية", "الفحيحيل", "صباح السالم", "المنقف", "الرميثية", "خيطان", "بيان", "القرين", "الفنطاس", "الجابرية", "المهبولة", "سلوى", "أبو حليفة", "الزور", "الوفرة", "صباح الأحمد", "المسيلة", "الصليبية", "العارضية", "الصليبخات", "الشويخ", "كبد", "العبدلي", "المسايل", "شرق", "الدسمة", "الدعية", "بنيد القار", "مشرف", "الشعب", "النسيم", "النزهة", "القادسية", "اليرموك", "الفيحاء", "العديلية", "الروضة", "السرة", "الصديق", "حطين", "الظهر", "جابر الأحمد", "مدينة سعد العبد الله"],
+        "قطر": ["الدوحة", "الوكرة", "الخور", "الريان", "العاصمة", "الدوحة", "الريان", "الوكرة", "الخور", "الشحانية", "دخان", "مسيعيد", "زكريت", "أم صلال", "الجميلية", "الغارية", "أبو سمرة", "روضة راشد", "أم باب", "الذخيرة", "السيلية", "اللؤلؤة", "الغرافة", "الوجبة", "المرة", "روضة الجهانية", "لوسيل"],
+        "الجزائر": ["الجزائر العاصمة", "وهران", "قسنطينة", "عنابة", "البليدة", "باتنة", "سطيف", "تيزي وزو", "بشار", "بجاية", "تمنراست", "تلمسان", "ورقلة", "بسكرة", "الجلفة", "المدية", "غرداية", "تبسة", "الشلف", "الأغواط", "عين تموشنت", "سوق أهراس", "معسكر", "المسيلة", "سيدي بلعباس", "عين الدفلى", "برج بوعريريج", "ميلة", "تيارت", "تيسمسيلت", "أدرار", "النعامة", "تيبازة", "جيجل", "سعيدة", "خنشلة", "الوادي", "البيض", "غليزان", "أم البواقي"],
+        "المغرب": ["الرباط", "الدار البيضاء", "مراكش", "فاس", "طنجة", "مكناس", "تطوان", "وجدة", "أغادير", "القنيطرة", "بني ملال", "خريبكة", "الجديدة", "سلا", "آسفي", "تارودانت", "العيون", "الناظور", "الراشيدية", "الحسيمة", "قلعة السراغنة", "الصويرة", "تمارة", "تاونات", "سيدي سليمان", "سيدي قاسم", "المحمدية", "العرائش", "الفقيه بن صالح", "تازة", "القصر الكبير", "الداخلة", "الخميسات", "زاكورة", "ورزازات", "تينغير"],
+        "السودان": ["الخرطوم", "أم درمان", "بحري", "بورتسودان", "كسلا", "الأبيض", "الفاشر", "مدني", "عطبرة", "دنقلا", "كادقلي", "سنار", "الدمازين", "كوستي", "القضارف", "نيالا", "الجنينة", "زالنجي", "ود مدني", "شندي", "الحصاحيصا", "رفاعة", "الرهد", "سواكن", "بارا", "أبو جبيهة", "طوكر", "الدلنج", "بابنوسة", "كريمة"],
+        "سوريا": ["دمشق", "حلب", "حمص", "حماة", "اللاذقية", "طرطوس", "إدلب", "دير الزور", "الحسكة", "الرقة", "السويداء", "درعا", "القنيطرة", "الميادين", "البوكمال", "جبلة", "تل أبيض", "منبج", "إعزاز", "الباب", "صلخد", "دوما", "داريا", "الزبداني", "السلمية", "مصياف", "بانياس", "صافيتا", "المالكية", "عامودا"],
+        "لبنان": ["بيروت", "طرابلس", "صيدا", "صور", "جبيل", "بعلبك", "زحلة", "النبطية", "جونية", "عاليه", "بعبدا", "بشري", "بعقلين", "شتورة", "دير القمر", "تبنين", "حاصبيا", "جب جنين", "راشيا", "بنت جبيل"],
+        "الأردن": ["عمان", "الزرقاء", "إربد", "العقبة", "المفرق", "السلط", "الكرك", "معان", "مادبا", "جرش", "عجلون", "الرمثا", "الطفيلة", "الفحيص", "الصويفية", "دير علا", "الشوبك"],
+        "تونس": ["تونس", "صفاقس", "سوسة", "بنزرت", "قابس", "القيروان", "تونس العاصمة", "سوسة", "صفاقس", "نابل", "قفصة", "المهدية", "القيروان", "بنزرت", "سليانة", "جندوبة", "زغوان", "مدنين", "قبلي", "تطاوين", "المنيهلة"],
+        "العراق": ["بغداد", "البصرة", "الموصل", "أربيل", "النجف", "كربلاء", "دهوك", "السليمانية", "الكوت", "بعقوبة", "سامراء", "الرمادي", "الفلوجة", "تكريت", "الحلة"],
+        "اليمن": ["صنعاء", "عدن", "تعز", "الحديدة", "إب", "حضرموت", "ذمار", "البيضاء", "شبوة", "الجوف", "مأرب", "الضالع", "حجة", "المهرة", "لحج"],
+        "ليبيا": ["طرابلس", "بنغازي", "مصراتة", "سبها", "درنة", "الزاوية", "البيضاء", "جادو", "غريان", "اجدابيا", "زليتن", "الخمس", "ترهونة"],
+        "موريتانيا": ["نواكشوط", "نواذيبو", "كيفه", "روصو", "العيون", "أطار", "أكجوجت", "سيلبابي", "كيهيدي", "تجكجة"],
+        "البحرين": ["المنامة", "المحرق", "الرفاع", "الحد", "سترة", "جد حفص", "عيسى", "الدراز", "البديع", "الزلاق"],
+        "عمان": ["مسقط", "صلالة", "نزوى", "بهلاء", "صور", "البريمي", "صحار", "بركاء", "عبري", "سيت", "دماء والطائيين", "مطرح", "الخابورة", "إبراء", "جعلان بني بو علي", "الرستاق", "الكامل والوافي", "وادي المعاول"],
+        "جيبوتي": ["جيبوتي (العاصمة)", "تاجورة", "علي سابيح", "دوراليه", "قوريولي", "بليلة", "فجر", "دمجلي", "عسل", "أوبوك"],
+        "فلسطين": ["القدس", "رام الله", "نابلس", "بيت لحم", "الخليل", "جنين", "طولكرم", "قلقيلية", "أريحا", "سلفيت", "طوباس", "بيت لحم", "غزة", "خان يونس", "رفح", "دير البلح", "خانيونس", "الشجاعية", "الزوايدة", "النصيرات", "المغازي", "بيت لاهيا"],
+        "الصومال": ["مقديشو (العاصمة)", "بوساسو", "هرجيسا", "جالكعيو", "برعو", "كيسمايو", "بيدوا", "بلدوين", "طوسمريب", "جروي", "ملسو", "طوكر", "لوقا"],
+        "جزر القمر": ["موروني (العاصمة)", "موهيلي", "أنجوان", "جزيرة القمر الكبرى", "نينغوي", "موي"],
+        "إريتريا": ["أسمرة (العاصمة)", "كرن", "مصوع", "نيقلا", "تسني", "بارنتو", "دفني", "عدال"],
+        "جنوب السودان": ["جوبا (العاصمة)", "واو", "ملكال", "بور", "ياي", "ملوال", "جوزي", "رياك", "أروب"]
+    };
+
+    function handleCountryChange(selectElement) {
+        const selectedCountry = selectElement.value;
+        const citySelect = selectElement.closest('.prayer-container').querySelector('select:nth-of-type(2)');
+        populateCities(selectedCountry, citySelect);
+        // تحديث select2 للمدن
+        $(citySelect).val('').trigger('change.select2');
     }
-}
 
-function populateCities(country, citySelect) {
-    // تحديث select2 بشكل صحيح
-    $(citySelect).empty().append('<option value="">اختر المدينة</option>');
-    citySelect.disabled = true;
+    function handleCityChange(selectElement) {
+        const selectedCity = selectElement.value;
+        const selectedCountry = selectElement.closest('.prayer-container').querySelector('select:nth-of-type(1)').value;
+        if (selectedCity && selectedCountry) {
+            fetchPrayerTimes(selectedCity, selectedCountry, selectElement);
+        }
+    }
 
-    if (country && countriesAndCities[country]) {
-        citySelect.disabled = false;
-        countriesAndCities[country].forEach(city => {
+    function populateCountries(selectElement) {
+        for (let country in countriesAndCities) {
             const option = document.createElement('option');
-            option.value = city;
-            option.textContent = city;
-            citySelect.appendChild(option);
-        });
-    }
-    // إعلام select2 بالتغيير
-    $(citySelect).trigger('change.select2');
-}
-
-window.onload = function() {
-    const container = document.querySelector('.prayer-container');
-    const countrySelect = container.querySelector('select:nth-of-type(1)');
-
-    populateCountries(countrySelect);
-    // تحديث select2 بعد ملء الخيارات
-    $(countrySelect).trigger('change.select2');
-
-    // استعادة آخر اختيار من localStorage
-    updateUIFromLocalStorage();
-}
-
-function fetchPrayerTimes(city, country, selectElement) {
-    const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const timings = data.data.timings;
-            const container = selectElement.closest('.prayer-container');
-
-            container.querySelector('.fajr-time').textContent    = formatArabicTime(timings.Fajr);
-            container.querySelector('.sunrise-time').textContent = formatArabicTime(timings.Sunrise);
-            container.querySelector('.dhuhr-time').textContent   = formatArabicTime(timings.Dhuhr);
-            container.querySelector('.asr-time').textContent     = formatArabicTime(timings.Asr);
-            container.querySelector('.maghrib-time').textContent = formatArabicTime(timings.Maghrib);
-            container.querySelector('.isha-time').textContent    = formatArabicTime(timings.Isha);
-
-            // حفظ الدولة، المدينة، وأوقات الصلاة في LocalStorage
-            const selectedCountry = container.querySelector('select:nth-of-type(1)').value;
-            const selectedCity = container.querySelector('select:nth-of-type(2)').value;
-            saveToLocalStorage(selectedCountry, selectedCity, timings);
-
-            updateCountdown(timings, container);
-        });
-}
-
-function updateCountdown(timings, container) {
-    if (countdownTimeout) {
-        clearTimeout(countdownTimeout);
-    }
-
-    const now = moment();
-    const prayerTimes = [
-        { row: container.querySelector('.fajr-prayer-row'),    time: moment(timings.Fajr, "HH:mm"),    name: 'الفجر' },
-        { row: container.querySelector('.dhuhr-prayer-row'),   time: moment(timings.Dhuhr, "HH:mm"),   name: 'الظهر' },
-        { row: container.querySelector('.asr-prayer-row'),     time: moment(timings.Asr, "HH:mm"),     name: 'العصر' },
-        { row: container.querySelector('.maghrib-prayer-row'), time: moment(timings.Maghrib, "HH:mm"), name: 'المغرب' },
-        { row: container.querySelector('.isha-prayer-row'),    time: moment(timings.Isha, "HH:mm"),    name: 'العشاء' }
-    ];
-
-    // الشروق لا يُحدَّد كصلاة قادمة في العداد
-    const sunriseRow = container.querySelector('.sunrise-prayer-row');
-    if (sunriseRow) sunriseRow.classList.remove('highlighted-next-prayer');
-
-    let nextPrayer = null;
-
-    for (let i = 0; i < prayerTimes.length; i++) {
-        prayerTimes[i].row.classList.remove('highlighted-next-prayer');
-
-        if (now.isBefore(prayerTimes[i].time)) {
-            nextPrayer = prayerTimes[i];
-            break;
+            option.value = country;
+            option.textContent = country;
+            selectElement.appendChild(option);
         }
     }
 
-    if (nextPrayer) {
-        nextPrayer.row.classList.add('highlighted-next-prayer');
-        const diff = nextPrayer.time.diff(now);
-        container.querySelector('.prayer-countdown-timer').textContent = moment.utc(diff).format("HH:mm:ss");
+    // populateCities مع callback اختياري بعد الانتهاء
+    function populateCities(country, citySelect, callback) {
+        citySelect.innerHTML = '<option value="">اختر المدينة</option>';
+        citySelect.disabled = true;
+        if (country && countriesAndCities[country]) {
+            citySelect.disabled = false;
+            countriesAndCities[country].forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+        }
+        // تحديث select2 بعد تعبئة الخيارات
+        $(citySelect).trigger('change.select2');
+        if (typeof callback === 'function') callback();
+    }
 
-        // عرض الوقت القادم بصيغة عربية
-        const nextHour = nextPrayer.time.hour();
-        const nextMin  = nextPrayer.time.format('mm');
-        const suffix   = nextHour < 12 ? 'ص' : 'م';
-        let h = nextHour === 0 ? 12 : nextHour > 12 ? nextHour - 12 : nextHour;
-        container.querySelector('.next-prayer-time').textContent = `${suffix} ${h}:${nextMin}`;
+    window.onload = function () {
+        const container = document.querySelector('.prayer-container');
+        const countrySelect = container.querySelector('select:nth-of-type(1)');
+        populateCountries(countrySelect);
+        // تحديث select2 بعد تعبئة الدول
+        $(countrySelect).trigger('change.select2');
+        // استرجاع آخر اختيار للمستخدم تلقائياً
+        updateUIFromLocalStorage(container);
+        updateDate();
+        setInterval(updateDate, 24 * 60 * 60 * 1000);
+    };
 
-        // أظهر الديف مع الأذان عند موعد الصلاة
-        if (diff < 1000 * 60) {
-            showAdhanAlert();
+    function fetchPrayerTimes(city, country, selectElement) {
+        const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const timings = data.data.timings;
+                const container = selectElement.closest('.prayer-container');
+                displayTimings(timings, container);
+                const selectedCountry = container.querySelector('select:nth-of-type(1)').value;
+                const selectedCity = container.querySelector('select:nth-of-type(2)').value;
+                saveToLocalStorage(selectedCountry, selectedCity, timings);
+                updateCountdown(timings, container);
+            });
+    }
+
+    function updateCountdown(timings, container) {
+        if (countdownTimeout) clearTimeout(countdownTimeout);
+
+        const now = moment();
+        // الشروق لا يُحسب كوقت صلاة في العداد
+        const prayerTimes = [
+            { row: container.querySelector('.fajr-prayer-row'),    time: moment(timings.Fajr, "HH:mm") },
+            { row: container.querySelector('.dhuhr-prayer-row'),   time: moment(timings.Dhuhr, "HH:mm") },
+            { row: container.querySelector('.asr-prayer-row'),     time: moment(timings.Asr, "HH:mm") },
+            { row: container.querySelector('.maghrib-prayer-row'), time: moment(timings.Maghrib, "HH:mm") },
+            { row: container.querySelector('.isha-prayer-row'),    time: moment(timings.Isha, "HH:mm") }
+        ];
+
+        let nextPrayer = null;
+        prayerTimes.forEach(p => p.row.classList.remove('highlighted-next-prayer'));
+
+        for (let i = 0; i < prayerTimes.length; i++) {
+            if (now.isBefore(prayerTimes[i].time)) {
+                nextPrayer = prayerTimes[i];
+                break;
+            }
         }
 
-        countdownTimeout = setTimeout(() => updateCountdown(timings, container), 1000);
-    } else {
-        container.querySelector('.prayer-countdown-timer').textContent = "00:00:00";
-        container.querySelector('.next-prayer-time').textContent = "غداً";
+        if (nextPrayer) {
+            nextPrayer.row.classList.add('highlighted-next-prayer');
+            const diff = nextPrayer.time.diff(now);
+
+            // العداد بأرقام عربية
+            const hh = toArabicNumerals(Math.floor(diff / 3600000).toString().padStart(2, '0'));
+            const mm = toArabicNumerals((Math.floor(diff / 60000) % 60).toString().padStart(2, '0'));
+            const ss = toArabicNumerals((Math.floor(diff / 1000) % 60).toString().padStart(2, '0'));
+            container.querySelector('.prayer-countdown-timer').textContent = `${hh}:${mm}:${ss}`;
+            container.querySelector('.next-prayer-time').textContent = formatTimeArabic(nextPrayer.time.format("HH:mm"));
+
+            if (diff < 1000 * 60) showAdhanAlert();
+            countdownTimeout = setTimeout(() => updateCountdown(timings, container), 1000);
+        } else {
+            container.querySelector('.prayer-countdown-timer').textContent = "٠٠:٠٠:٠٠";
+            container.querySelector('.next-prayer-time').textContent = "غداً";
+        }
     }
-}
 
-function showAdhanAlert() {
-    const adhanAlertDiv = document.getElementById('adhan-alert-container');
-    const adhanAudio = document.getElementById('adhan-audio');
-    adhanAlertDiv.style.display = 'flex';
-    adhanAudio.play();
+    function showAdhanAlert() {
+        const adhanAlertDiv = document.getElementById('adhan-alert-container');
+        const adhanAudio = document.getElementById('adhan-audio');
+        adhanAlertDiv.style.display = 'flex';
+        adhanAudio.play();
+        adhanTimeout = setTimeout(() => {
+            adhanAlertDiv.style.display = 'none';
+            adhanAudio.pause();
+            adhanAudio.currentTime = 0;
+        }, adhanAudio.duration * 1000);
+    }
 
-    adhanTimeout = setTimeout(() => {
+    function closeAdhanAlert() {
+        const adhanAlertDiv = document.getElementById('adhan-alert-container');
+        const adhanAudio = document.getElementById('adhan-audio');
         adhanAlertDiv.style.display = 'none';
         adhanAudio.pause();
         adhanAudio.currentTime = 0;
-    }, adhanAudio.duration * 1000);
-}
-
-function closeAdhanAlert() {
-    const adhanAlertDiv = document.getElementById('adhan-alert-container');
-    const adhanAudio = document.getElementById('adhan-audio');
-    adhanAlertDiv.style.display = 'none';
-    adhanAudio.pause();
-    adhanAudio.currentTime = 0;
-
-    if (adhanTimeout) {
-        clearTimeout(adhanTimeout);
+        if (adhanTimeout) clearTimeout(adhanTimeout);
     }
-}
 
+    function updateDate() {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date();
+        const formattedDate = today.toLocaleDateString('ar-EG', options);
+        document.getElementById('date').innerText = formattedDate;
+    }
 
-function updateDate() {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString('ar-EG', options);
-    document.getElementById('date').innerText = formattedDate;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    updateDate();
-    setInterval(updateDate, 24 * 60 * 60 * 1000);
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".copyable").forEach(el => {
-        el.addEventListener("click", () => {
-            const sel = window.getSelection(), range = document.createRange();
-            range.selectNodeContents(el);
-            sel.removeAllRanges();
-            sel.addRange(range);
-            const msg = document.getElementById("message");
-            (navigator.clipboard ? navigator.clipboard.writeText(el.textContent) : document.execCommand("copy"))
-            .then(() => {
-                msg.style.display = "block";
-                msg.textContent = "Copied!";
-                setTimeout(() => {
-                    msg.style.display = "none";
-                    sel.removeAllRanges();
-                }, 3000);
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".copyable").forEach(el => {
+            el.addEventListener("click", () => {
+                const sel = window.getSelection(), range = document.createRange();
+                range.selectNodeContents(el);
+                sel.removeAllRanges();
+                sel.addRange(range);
+                const msg = document.getElementById("message");
+                (navigator.clipboard ? navigator.clipboard.writeText(el.textContent) : Promise.reject())
+                    .catch(() => { document.execCommand("copy"); return Promise.resolve(); })
+                    .then(() => {
+                        msg.style.display = "block";
+                        msg.textContent = "تم النسخ!";
+                        setTimeout(() => { msg.style.display = "none"; sel.removeAllRanges(); }, 3000);
+                    });
             });
         });
     });
-});
+    </script>
 
-</script>
+    <script>
+    // ========== scroll & ripple ==========
+    let activeButton = null;
 
+    function scrollToDiv(divId, button) {
+        const element = document.getElementById(divId);
+        element.scrollIntoView({ behavior: 'smooth' });
+        if (activeButton) activeButton.classList.remove('active');
+        button.classList.add('active');
+        activeButton = button;
+    }
 
-<!-- stily (vi.css) -->
- <style>
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttons = document.querySelectorAll('.prayer-menu button');
+        if (buttons.length > 0) {
+            const lastButton = buttons[buttons.length - 1];
+            lastButton.classList.add('active');
+            activeButton = lastButton;
+        }
+        buttons.forEach(button => {
+            button.classList.add('ripple-btn');
+            button.setAttribute('onmousedown', 'createRipple(event)');
+        });
+    });
+
+    function createRipple(event) {
+        const button = event.currentTarget;
+        const ripple = document.createElement("span");
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = event.clientX - rect.left - size / 2;
+        const y = event.clientY - rect.top - size / 2;
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.left = x + "px";
+        ripple.style.top = y + "px";
+        ripple.classList.add("ripple");
+        button.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    }
+    </script>
+
+    <style>
     body .select2-container .select2-selection--single {
-    font-family: system-ui;
-    cursor: pointer;
-    outline: none;
-    margin: 0 5px;
-    border: none;
-    border-radius: 7px;
-    color: #677483;
-    background-color: #f6f7f9;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url(image/download.png);
-    background-repeat: no-repeat;
-    background-position: calc(100% - 8px) center;
-    background-size: 10px;
-    height: 34px;
+        font-family: system-ui;
+        cursor: pointer;
+        outline: none;
+        margin: 0 5px;
+        border: none;
+        border-radius: 7px;
+        color: #677483;
+        background-color: #f6f7f9;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url(image/download.png);
+        background-repeat: no-repeat;
+        background-position: calc(100% - 8px) center;
+        background-size: 10px;
+        height: 34px;
     }
-
-    body .select2-container--default .select2-selection--single .select2-selection__arrow {
-        display: none;
-    }
-
+    body .select2-container--default .select2-selection--single .select2-selection__arrow { display: none; }
     body .select2-container .select2-selection--single .select2-selection__rendered {
         overflow: hidden;
         padding: 3px 0;
     }
-
     body .select2-container--default .select2-search--dropdown .select2-search__field {
         text-align: right;
         font-family: system-ui;
@@ -1065,32 +928,23 @@ document.addEventListener("DOMContentLoaded", () => {
         border: none;
         background-color: #f6f7f9;
         color: #677483;
-        /* منع الفوكس التلقائي */
-        pointer-events: auto;
     }
-    body .select2-container--default .select2-search--dropdown .select2-search__field::before {
-        position: absolute;
-        content: "ابحث";
-    }
-
     body .select2-container--default .select2-results__option {
-        padding: 10px;
-        text-align: right;
-        color: #677483;
-        background-color: #f6f7f900;
-        font-family: system-ui;
+    padding: 10px 6px;
+    margin-right: 0 !important;
+    margin: 0 4px;
+    text-align: right;
+    color: #677483;
+    background-color: #f6f7f900;
+    font-family: system-ui;
+    border-radius: 10px;
     }
-
     body .select2-container--default .select2-results__option--highlighted {
         background-color: #e2e6ea;
         color: #333;
     }
-    body .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: #444;
-    }
-    body .select2-container {
-        z-index: 11;
-    }
+    body .select2-container--default .select2-selection--single .select2-selection__rendered { color: #444; }
+    body .select2-container { z-index: 11; }
     body .select2-container--open .select2-dropdown--above {
         box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
         overflow: hidden;
@@ -1113,35 +967,14 @@ document.addEventListener("DOMContentLoaded", () => {
         max-height: 400px;
         overflow-y: auto;
     }
-
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar {
-        width: 5px;
-    }
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb {
-        background: #b8b8b85d;
-        border-radius: 10px;
-    }
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-track {
-        background: #f1f1f100;
-        border-radius: 10px;
-    }
-    body .select2-container--default .select2-results>.select2-results__options:hover::-webkit-scrollbar-thumb {
-        background: #c9c9c9;
-    }
-
-    body .select2-container--default .select2-results__option[aria-selected=true] {
-        background-color: #f6f7f9;
-    }
-    body .select2-container--default .select2-results__option--highlighted[aria-selected] {
-        background-color: #5897fb;
-        color: white;
-    }
-    body .select2-container--default.select2-container--disabled .select2-selection--single {
-        background-color: #f6f7f9;
-        cursor: default;
-        filter: opacity(0.5);
-    }
- </style>
+    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar { width: 5px; }
+    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
+    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-track { background: #f1f1f100; border-radius: 10px; }
+    body .select2-container--default .select2-results>.select2-results__options:hover::-webkit-scrollbar-thumb { background: #c9c9c9; }
+    body .select2-container--default .select2-results__option[aria-selected=true] { background-color: #f6f7f9; }
+    body .select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #5897fb; color: white; }
+    body .select2-container--default.select2-container--disabled .select2-selection--single { background-color: #f6f7f9; cursor: default; filter: opacity(0.5); }
+    </style>
 
 </body>
 </html>
