@@ -1,35 +1,39 @@
-<html lang="en" class="hydrated"><head>
-    <meta charset="UTF-8"><style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Document &lt;iframe&gt;</title>
-    <link rel="icon" href="image/Text Docudent-svg.svg">
+    <title>Text Document <iframe></title>
+    <link rel="icon" href="image/mosque.png">
     <!-- الأذان -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" />
 
 </head>
 <body>
     <style>
         body {
-            align-items: flex-start;
-            display: flex;
-            overflow: hidden;
-            font-size: 14px;
-            width: max-content;
-            height: max-content;
-            background-color: #00000000;
-            margin: 0;
+    align-items: flex-start;
+    display: flex;
+    overflow: hidden;
+    font-size: 14px;
+    width: 100%;
+    height: 100vh;
+    background-color: #00000000;
+    margin: 0;
         }
         /* أضف أنماطًا لـ div حسب الحاجة */
         #myDivas { 
-            align-items: flex-end;
-            display: flex;
-            position: relative;
-            height: 600px;
-            padding: 8px;
-            background-color: #00000000;
+    align-items: flex-end;
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    background-color: #00000000;
         }
         button {
             cursor: pointer;
@@ -160,13 +164,14 @@ gol {
     font-family: system-ui;
     /* direction: rtl; */
     animation: show-buttons 0.3s;
-    padding: 10px;
+    padding: 0 10px;
     background-color: #ffffffd6;
     backdrop-filter: blur(21px);
-    border-radius: 10px;
-    width: 321px;
-    height: 534px;
-    box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    max-width: -webkit-fill-available;
+    box-shadow: none;
 }
 .Prayer-image {
     z-index: 110;
@@ -179,6 +184,7 @@ gol {
     transform: translate(-50%);
     left: 50%;
     overflow: hidden;
+    display: none;
     box-shadow: 0 0px 5px 0px rgba(60, 64, 67, .15);
 }
 .Prayer-image img {
@@ -244,7 +250,7 @@ gol {
     position: relative;
     text-align: center;
     margin-bottom: 3px;
-    height: 447.59px;
+    height: 100%;
     overflow-y: auto;
 }
 .prayer-div-div .ss {
@@ -415,12 +421,10 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
     }
 }
     </style>
+</head>
+<body>
 
-
-
-        <div id="myDivas" style="
-    /* margin: auto; */
-">
+        <div id="myDivas">
         <!-- Prayer times -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
@@ -431,9 +435,9 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
             <div class="Prayer-image cor"><img src="image/mosque.png" alt=""></div>
             <div class="prayer-timesa">
                 <div class="prayer-menu container">
-                    <button onclick="scrollToDiv('section-3', this)" class="ripple-btn" onmousedown="createRipple(event)">ادعيه</button>
-                    <button onclick="scrollToDiv('section-2', this)" class="ripple-btn" onmousedown="createRipple(event)">الأذكار</button>
-                    <button onclick="scrollToDiv('section-1', this)" class="ripple-btn active" onmousedown="createRipple(event)">اوقات الصلاة</button>
+                    <button onclick="scrollToDiv('section-3', this)">ادعيه</button>
+                    <button onclick="scrollToDiv('section-2', this)">الأذكار</button>
+                    <button onclick="scrollToDiv('section-1', this)">اوقات الصلاة</button>
                 </div>
                 <div class="prayer-div">
                     <div id="section-1" class="prayer-div-div section">
@@ -441,9 +445,9 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                         <!-- ديف يحتوي على أوقات الصلاة وزر لإغلاقه -->
                         <div class="prayer-container">
                             <div class="">
-                                <h2 class="selected-location-title" id="date">الثلاثاء، ١٩ مايو ٢٠٢٦</h2>
-                                <div class="prayer-countdown-timer">06:35:01</div>
-                                <div class="next-prayer-time-display">متبقي على الصلاة القادمة: <span class="next-prayer-time">12:18 PM</span></div>
+                                <h2 class="selected-location-title" id="date">0/0/0000</h2>
+                                <div class="prayer-countdown-timer">00:00:00</div>
+                                <div class="next-prayer-time-display">متبقي على الصلاة القادمة: <span class="next-prayer-time">PM 5:45</span></div>
                                 <table class="prayer-times-table">
                                     <thead>
                                     <tr>
@@ -454,23 +458,23 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                                     <tbody class="prayer-times-body">
                                     <tr class="fajr-prayer-row">
                                         <td class="prayer-times-data">الفجر</td>
-                                        <td class="fajr-time prayer-times-data">04:09</td>
+                                        <td class="fajr-time prayer-times-data">AM 4:27</td>
                                     </tr>
-                                    <tr class="dhuhr-prayer-row highlighted-next-prayer">
+                                    <tr class="dhuhr-prayer-row">
                                         <td class="prayer-times-data">الظهر</td>
-                                        <td class="dhuhr-time prayer-times-data">12:18</td>
+                                        <td class="dhuhr-time prayer-times-data">AM 11:43</td>
                                     </tr>
                                     <tr class="asr-prayer-row">
                                         <td class="prayer-times-data">العصر</td>
-                                        <td class="asr-time prayer-times-data">15:42</td>
+                                        <td class="asr-time prayer-times-data">PM 3:07</td>
                                     </tr>
                                     <tr class="maghrib-prayer-row">
                                         <td class="prayer-times-data">المغرب</td>
-                                        <td class="maghrib-time prayer-times-data">19:00</td>
+                                        <td class="maghrib-time prayer-times-data">PM 5:45</td>
                                     </tr>
                                     <tr class="isha-prayer-row">
                                         <td style="border-bottom-color: #00000000;" class="prayer-times-data">العشاء</td>
-                                        <td style="border-bottom-color: #00000000;" class="isha-time prayer-times-data">20:30</td>
+                                        <td style="border-bottom-color: #00000000;" class="isha-time prayer-times-data">PM 7:15</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -478,10 +482,12 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                             </div>
                         
                             <div class="omg">
-                                <select onchange="handleCountryChange(this)" class="dropdown-selector custom-select mySelect select2-hidden-accessible" style="width: 150px;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option value="" data-select2-id="3">اختر الدولة</option>
-                                <option value="السعودية" data-select2-id="7">السعودية</option><option value="مصر">مصر</option><option value="الإمارات">الإمارات</option><option value="الكويت">الكويت</option><option value="قطر">قطر</option><option value="الجزائر">الجزائر</option><option value="المغرب">المغرب</option><option value="السودان">السودان</option><option value="سوريا">سوريا</option><option value="لبنان">لبنان</option><option value="الأردن">الأردن</option><option value="تونس">تونس</option><option value="العراق">العراق</option><option value="اليمن">اليمن</option><option value="ليبيا">ليبيا</option><option value="موريتانيا">موريتانيا</option><option value="البحرين">البحرين</option><option value="عمان">عمان</option><option value="جيبوتي">جيبوتي</option><option value="فلسطين">فلسطين</option><option value="الصومال">الصومال</option><option value="جزر القمر">جزر القمر</option><option value="إريتريا">إريتريا</option><option value="جنوب السودان">جنوب السودان</option></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 150px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-yv6m-container"><span class="select2-selection__rendered" id="select2-yv6m-container" role="textbox" aria-readonly="true" title="السعودية"><span class="select2-selection__clear" title="Remove all items" data-select2-id="8">×</span>السعودية</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                <select onchange="handleCityChange(this)" class="dropdown-selector custom-select mySelect select2-hidden-accessible" style="width: 150px;" data-select2-id="4" tabindex="-1" aria-hidden="true"><option value="">اختر المدينة</option><option value="الرياض">الرياض</option><option value="جدة">جدة</option><option value="مكة المكرمة">مكة المكرمة</option><option value="المدينة المنورة" data-select2-id="9">المدينة المنورة</option><option value="الدمام">الدمام</option><option value="الخبر">الخبر</option><option value="الطائف">الطائف</option><option value="بريدة">بريدة</option><option value="أبها">أبها</option><option value="تبوك">تبوك</option><option value="حائل">حائل</option><option value="نجران">نجران</option><option value="جيزان">جيزان</option><option value="القطيف">القطيف</option><option value="خميس مشيط">خميس مشيط</option><option value="الهفوف">الهفوف</option><option value="المبرز">المبرز</option><option value="الظهران">الظهران</option><option value="الجبيل">الجبيل</option><option value="ينبع">ينبع</option><option value="حفر الباطن">حفر الباطن</option><option value="سكاكا">سكاكا</option><option value="عرعر">عرعر</option><option value="بيشة">بيشة</option><option value="القنفذة">القنفذة</option><option value="الباحة">الباحة</option><option value="الوجه">الوجه</option><option value="ضباء">ضباء</option><option value="القريات">القريات</option><option value="رفحاء">رفحاء</option><option value="الزلفي">الزلفي</option><option value="الخرج">الخرج</option><option value="المجمعة">المجمعة</option><option value="الدوادمي">الدوادمي</option><option value="شرورة">شرورة</option><option value="حوطة بني تميم">حوطة بني تميم</option><option value="وادي الدواسر">وادي الدواسر</option><option value="رأس تنورة">رأس تنورة</option><option value="الحائط">الحائط</option><option value="السليل">السليل</option><option value="طريف">طريف</option><option value="رجال ألمع">رجال ألمع</option><option value="بلجرشي">بلجرشي</option><option value="تنومة">تنومة</option><option value="أحد رفيدة">أحد رفيدة</option><option value="تثليث">تثليث</option><option value="الليث">الليث</option><option value="العلا">العلا</option><option value="النماص">النماص</option><option value="بيش">بيش</option><option value="العارضة">العارضة</option><option value="سراة عبيدة">سراة عبيدة</option><option value="محايل عسير">محايل عسير</option><option value="الطوال">الطوال</option><option value="الريث">الريث</option><option value="الدرب">الدرب</option><option value="ظهران الجنوب">ظهران الجنوب</option><option value="ضمد">ضمد</option><option value="بارق">بارق</option><option value="تربة">تربة</option><option value="حبونا">حبونا</option><option value="الخرمة">الخرمة</option><option value="المخواة">المخواة</option><option value="القويعية">القويعية</option><option value="مرات">مرات</option><option value="عفيف">عفيف</option><option value="البدائع">البدائع</option><option value="عنيزة">عنيزة</option><option value="الأسياح">الأسياح</option><option value="النبهانية">النبهانية</option><option value="رياض الخبراء">رياض الخبراء</option><option value="الشماسية">الشماسية</option><option value="المذنب">المذنب</option><option value="الرس">الرس</option><option value="البكيرية">البكيرية</option><option value="خليص">خليص</option><option value="رابغ">رابغ</option><option value="الكامل">الكامل</option><option value="بحرة">بحرة</option><option value="ثول">ثول</option><option value="حريملاء">حريملاء</option><option value="العيينة">العيينة</option><option value="الدرعية">الدرعية</option><option value="حوطة سدير">حوطة سدير</option><option value="تمير">تمير</option><option value="ضرما">ضرما</option><option value="المزاحمية">المزاحمية</option><option value="القويعية">القويعية</option><option value="الحريق">الحريق</option><option value="صامطة">صامطة</option><option value="الدائر">الدائر</option><option value="فيفا">فيفا</option><option value="صبيا">صبيا</option><option value="العيدابي">العيدابي</option><option value="وادي الفرع">وادي الفرع</option><option value="الحناكية">الحناكية</option><option value="المندق">المندق</option><option value="القرى">القرى</option><option value="العقيق">العقيق</option><option value="بلجرشي">بلجرشي</option></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 150px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-otzy-container"><span class="select2-selection__rendered" id="select2-otzy-container" role="textbox" aria-readonly="true" title="المدينة المنورة"><span class="select2-selection__clear" title="Remove all items" data-select2-id="10">×</span>المدينة المنورة</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                <select onchange="handleCountryChange(this)" class="dropdown-selector custom-select mySelect" style="width: 150px;">
+                                    <option value="">اختر الدولة</option>
+                                </select>
+                                <select onchange="handleCityChange(this)" class="dropdown-selector custom-select mySelect" style="width: 150px;">
+                                    <option value="">اختر المدينة</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -576,8 +582,8 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                      </div>
                      <!-- 4 -->
                      <div id="section-4" class="prayer-div-div section">
-                        <span class="ss">&lt; iframe &gt; التضمين بموقعك</span>
-                        <textarea readonly="" class="c-sec copyable">&lt;iframe src="file:///C:/Users/Lenovo/OneDrive/Desktop/Chat%20[%20Eyad%20]/noon/noon.html" frameborder="0"&gt;&lt;/iframe&gt;</textarea>
+                        <span class="ss">< iframe > التضمين بموقعك</span>
+                        <textarea readonly class="c-sec copyable"><iframe src="file:///C:/Users/Lenovo/OneDrive/Desktop/Chat%20[%20Eyad%20]/noon/noon.html" frameborder="0"></iframe></textarea>
                         <gol></gol>
                         <span class="ss">🤲 هاذا ماتيسر لا تنسنا من صالح دعائك</span>
                         <div class="good cor">اخر إصدار عام ,10/1/2024م<br><span><a href="#" style="text-decoration: none;color: #4d4d4d;">Text Document</a> جميع الحقوق محفوظة لدى</span></div>
@@ -585,7 +591,7 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
                     
                 </div>
             </div>
-            <p id="message" style="display: none;">Copied!</p>
+            <p id="message"></p>
             <!-- --- -->
              <div class="goool" id="adhan-alert-container">
                 <audio id="adhan-audio" src="image/019--1.mp3"></audio>
@@ -606,7 +612,7 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
 
 
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
@@ -1097,12 +1103,12 @@ document.addEventListener("DOMContentLoaded", () => {
  </style>
 
 
-<!-- <iframe src="https://tybascript1234.github.io/index/" frameborder="0"></iframe> -->
+<!-- <iframe src="https://tybascript1234.github.io/index/" frameborder="0"></iframe>
 
 
 <script src="https://raw.githubusercontent.com/Tybascript1234/Quran-recited/main/your-script.js"></script>
 
-<div id="content">404: Not Found</div>
+<div id="content"></div>
 
 <script>
     fetch('https://raw.githubusercontent.com/Tybascript1234/Quran-recited/main/index.html')
@@ -1111,7 +1117,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('content').innerHTML = data;
         })
         .catch(error => console.error('Error:', error));
-</script>
-
-
-</body></html>
+</script> -->
+</body>
+</html>
