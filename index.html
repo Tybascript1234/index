@@ -421,7 +421,11 @@ body .select2-container--default .select2-results__option::-webkit-scrollbar-tra
     }
 }
 @media (max-width: 768px) {
+    body {
+        user-select: none;
+    }
     button,a,select {
+        user-select: none;
         cursor: context-menu !important;
     }
 }
