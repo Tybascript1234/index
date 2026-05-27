@@ -102,6 +102,9 @@ border-collapse: collapse;
         font-weight: 500;
         background-color: #faf2d7;
         color: #d1b75c;
+        position: relative;
+        z-index: 5;
+        box-shadow: 1px 0.1px 0px #d1b75c,-1px -0.9px 0px #d1b75c;
     }
     .dropdown-selector::-webkit-scrollbar { width: 5px; }
     .dropdown-selector::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
@@ -139,6 +142,7 @@ border-collapse: collapse;
         border-radius: 7px;
         margin-bottom: 20px;
         margin-top: 10px;
+        user-select: text !important;
     }
     .c-sec:focus {
         box-shadow: 0 0 0 5px #dfecff;
@@ -150,17 +154,18 @@ border-collapse: collapse;
         -webkit-user-drag: none;
     }
     .Prayer-times {
-        position: relative;
-        font-family: system-ui;
-        animation: show-buttons 0.3s;
-        padding: 0 10px;
-        background-color: #ffffffd6;
-        backdrop-filter: blur(21px);
-        border-radius: 0;
-        width: 100%;
-        height: 100%;
-        max-width: -webkit-fill-available;
-        box-shadow: none;
+    position: relative;
+    font-family: system-ui;
+    animation: show-buttons 0.3s;
+    padding: 0 10px;
+    background-color: #ffffffd6;
+    backdrop-filter: blur(21px);
+    border-radius: 0;
+    width: 950px;
+    margin: auto;
+    height: 100%;
+    max-width: -webkit-fill-available;
+    box-shadow: none;
     }
     .Prayer-image {
         z-index: 110;
@@ -209,7 +214,7 @@ border-collapse: collapse;
         box-shadow: 0px 18px 8px #fff;
     }
     .prayer-menu button {
-    transition: ease 0.2s;
+        transition: ease 0.2s;
     border: none;
     margin: 0 5px;
     border-radius: 20px;
@@ -218,7 +223,7 @@ border-collapse: collapse;
     color: #d1b75c;
     background: #faf2d7;
     font-family: "Tajawal", sans-serif;
-    line-height: 0;
+    line-height: 2;
     font-size: 15px;
     }
     .prayer-menu button:active { background: #f3e9ca; }
@@ -254,10 +259,9 @@ border-collapse: collapse;
     bottom: 0;
     left: 50%;
     transform: translate(-50%);
-    padding: 16px;
+    padding: 16px 16px 10px 16px;
     font-size: 16px;
     font-family: "Tajawal", sans-serif;
-
     }
     .prayer-div-list {
         font-family: system-ui;
