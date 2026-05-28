@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أوقات الصلاة</title>
-    <link rel="icon" href="image/mosque.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" />
-    <link rel="manifest" href="/manifest.json">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <style>
-    * {
-        -webkit-tap-highlight-color: transparent;
-    }
+    * { -webkit-tap-highlight-color: transparent; }
     body {
         align-items: flex-start;
         display: flex;
@@ -39,28 +35,20 @@
         padding: 0;
         background-color: #00000000;
     }
-    button {
-        cursor: pointer;
-        font-family: system-ui;
-    }
+    button { cursor: pointer; font-family: system-ui; }
     button, input, div, textarea, a, select, span {
         outline-color: #1e79f0;
         -webkit-tap-highlight-color: transparent !important;
     }
-
     gol {
         height: 1px;
         background-color: #f6f7f9;
         width: -webkit-fill-available;
         display: block;
     }
-    .prayer-timesa gol {
-        background-color: #ebedf1;
-        margin: 4px 0;
-    }
+    .prayer-timesa gol { background-color: #ebedf1; margin: 4px 0; }
     .prayer-container {
-          font-family: "Tajawal", sans-serif;
-        /* font-family: system-ui; */
+        font-family: "Tajawal", sans-serif;
         direction: rtl;
         text-align: center;
         overflow-y: auto;
@@ -73,25 +61,21 @@
         position: absolute;
         bottom: 8px;
     }
-    .prayer-times-container {
-        margin-top: 54px;
-    }
+    .prayer-times-container { margin-top: 54px; }
     .prayer-countdown-timer {
-    font-size: 2.7em;
-    margin-top: 10px;
-    color: #ff0000;
-    margin-bottom: 5px;
-}
+        font-size: 2.7em;
+        margin-top: 10px;
+        color: #ff0000;
+        margin-bottom: 5px;
+    }
     .prayer-times-table {
-border-collapse: collapse;
-    margin: 20px 10px;
-    margin-top: 10px;
-    width: -webkit-fill-available;
-    font-size: 18px;
+        border-collapse: collapse;
+        margin: 20px 10px;
+        margin-top: 10px;
+        width: -webkit-fill-available;
+        font-size: 18px;
     }
-    .next-prayer-time-display {
-        font-size: 16px;
-    }
+    .next-prayer-time-display { font-size: 16px; }
     .prayer-times-header, .prayer-times-data {
         padding: 10px;
         border-top: 1px solid #dadada;
@@ -104,12 +88,7 @@ border-collapse: collapse;
         color: #d1b75c;
         position: relative;
         z-index: 5;
-        /* box-shadow: 1px -1px 0px #d1b75c,-1px 0px 0px #d1b75c; */
     }
-    /* .highlighted-next-prayer td {
-        border-top: 1px solid #d1b75c;
-        border-bottom: 1px solid #d1b75c;
-    } */
     .dropdown-selector::-webkit-scrollbar { width: 5px; }
     .dropdown-selector::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
     .dropdown-selector::-webkit-scrollbar-track { background: #f1f1f100; border-radius: 10px; }
@@ -123,18 +102,6 @@ border-collapse: collapse;
         cursor: pointer;
     }
     .generic-button:hover { background-color: #45a049; }
-    .adhan-alert-container {
-        display: none;
-        position: fixed;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #ffdddd;
-        padding: 20px;
-        border: 2px solid #f00;
-        border-radius: 10px;
-        z-index: 1000;
-    }
     .c-sec {
         scrollbar-width: none;
         transition: ease 0.2s;
@@ -152,24 +119,20 @@ border-collapse: collapse;
         box-shadow: 0 0 0 5px #dfecff;
         border: solid 1px #1e6ee3;
     }
-
-    img {
-        user-select: none;
-        -webkit-user-drag: none;
-    }
+    img { user-select: none; -webkit-user-drag: none; }
     .Prayer-times {
-    position: relative;
-    font-family: system-ui;
-    animation: show-buttons 0.3s;
-    padding: 0 10px;
-    background-color: #ffffffd6;
-    backdrop-filter: blur(21px);
-    border-radius: 0;
-    width: 900px;
-    margin: auto;
-    height: 100%;
-    max-width: -webkit-fill-available;
-    box-shadow: none;
+        position: relative;
+        font-family: system-ui;
+        animation: show-buttons 0.3s;
+        padding: 0 10px;
+        background-color: #ffffffd6;
+        backdrop-filter: blur(21px);
+        border-radius: 0;
+        width: 900px;
+        margin: auto;
+        height: 100%;
+        max-width: -webkit-fill-available;
+        box-shadow: none;
     }
     .Prayer-image {
         z-index: 110;
@@ -191,10 +154,7 @@ border-collapse: collapse;
         border: solid 1px #cccccc33;
         display: block;
     }
-    .prayer-timesa {
-        margin-top: 50px;
-        height: -webkit-fill-available;
-    }
+    .prayer-timesa { margin-top: 50px; height: -webkit-fill-available; }
     .times-button {
         position: absolute;
         top: 0;
@@ -219,16 +179,16 @@ border-collapse: collapse;
     }
     .prayer-menu button {
         transition: ease 0.2s;
-    border: none;
-    margin: 0 5px;
-    border-radius: 20px;
-    height: 33px;
-    padding: 0 13px;
-    color: #d1b75c;
-    background: #faf2d7;
-    font-family: "Tajawal", sans-serif;
-    line-height: 2;
-    font-size: 15px;
+        border: none;
+        margin: 0 5px;
+        border-radius: 20px;
+        height: 33px;
+        padding: 0 13px;
+        color: #d1b75c;
+        background: #faf2d7;
+        font-family: "Tajawal", sans-serif;
+        line-height: 2;
+        font-size: 15px;
     }
     .prayer-menu button:active { background: #f3e9ca; }
     .prayer-menu button.active {
@@ -248,24 +208,24 @@ border-collapse: collapse;
         overflow-y: auto;
     }
     .prayer-div-div .ss {
-    text-align: center;
-    user-select: none;
-    display: block;
-    margin: 13px 0;
-    font-size: 17px;
-    font-family: "Tajawal", sans-serif;
+        text-align: center;
+        user-select: none;
+        display: block;
+        margin: 13px 0;
+        font-size: 17px;
+        font-family: "Tajawal", sans-serif;
     }
     .good {
-    position: absolute;
-    width: max-content;
-    user-select: none;
-    color: #ccc;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    padding: 16px 16px 10px 16px;
-    font-size: 16px;
-    font-family: "Tajawal", sans-serif;
+        position: absolute;
+        width: max-content;
+        user-select: none;
+        color: #ccc;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+        padding: 16px 16px 10px 16px;
+        font-size: 16px;
+        font-family: "Tajawal", sans-serif;
     }
     .prayer-div-list {
         font-family: system-ui;
@@ -289,26 +249,11 @@ border-collapse: collapse;
         width: 5px;
         background-color: #faf2d7;
     }
-    .prayer-div-list a {
-        font-weight: 600;
-        color: #d1b75c;
-    }
+    .prayer-div-list a { font-weight: 600; color: #d1b75c; }
     .prayer-div-div::-webkit-scrollbar { width: 3px; }
     .prayer-div-div::-webkit-scrollbar:hover { width: 5px; }
     .prayer-div-div::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
     .prayer-div-div:hover::-webkit-scrollbar-thumb { background: #c9c9c9; }
-
-    #iframe2 {
-        box-shadow: 0px 4px 0px #fff inset;
-        border-radius: 2px;
-        background: rgb(255, 255, 255);
-        border: none;
-        width: 100%;
-        overflow: hidden;
-        height: 445px;
-        position: relative;
-        z-index: 5;
-    }
     #country, #city, #fetch-times {
         cursor: pointer;
         outline: none;
@@ -383,12 +328,7 @@ border-collapse: collapse;
         color: white;
         box-shadow: 0px 2px 7px #00000056;
     }
-
-    .ripple-btn {
-        position: relative;
-        overflow: hidden;
-        transition: ease 0.1s;
-    }
+    .ripple-btn { position: relative; overflow: hidden; transition: ease 0.1s; }
     .ripple {
         position: absolute;
         border-radius: 50%;
@@ -396,34 +336,96 @@ border-collapse: collapse;
         transform: scale(0);
         animation: ripple-animation 0.6s linear;
     }
-    @keyframes ripple-animation {
-        to { transform: scale(4); opacity: 0; }
-    }
+    @keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }
     @media (max-width: 768px) {
         body { user-select: none; }
         button, a, select { user-select: none; }
-        .good {
-            padding: 16px 16px 0px 16px !important;
-        }
+        .good { padding: 16px 16px 0px 16px !important; }
     }
-    tbody td {
+    #section-3 .prayer-div-list { transition: ease 0.2s; }
+    #section-3 .prayer-div-list:active { transform: scale(0.95); opacity: .6; }
 
+    /* ===== Select2 custom styles ===== */
+    body .select2-container .select2-selection--single {
+        font-family: system-ui;
+        cursor: pointer;
+        outline: none;
+        margin: 0 5px;
+        border: none;
+        border-radius: 7px;
+        color: #677483;
+        background-color: #f6f7f9;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-repeat: no-repeat;
+        background-position: calc(100% - 8px) center;
+        background-size: 10px;
+        height: 34px;
     }
-    #section-3 .prayer-div-list {
-        transition: ease 0.2s;
+    body .select2-container--default .select2-selection--single .select2-selection__arrow { display: none; }
+    body .select2-container .select2-selection--single .select2-selection__rendered {
+        overflow: hidden;
+        padding: 3px 0;
     }
-    #section-3 .prayer-div-list:active {
-        transform: scale(0.95);
-        opacity: .6;
+
+    /* ===== إخفاء حقل البحث تماماً ===== */
+    body .select2-container--default .select2-search--dropdown {
+        display: none !important;
     }
+
+    body .select2-container--default .select2-results__option {
+        padding: 10px 13px;
+        margin: 0 4px;
+        margin-right: 0;
+        text-align: right;
+        color: #677483;
+        background-color: #f6f7f900;
+        font-family: system-ui;
+        border-radius: 10px;
+    }
+    body .select2-container--default .select2-results__option--highlighted {
+        background-color: #e2e6ea;
+        color: #333;
+    }
+    body .select2-container--default .select2-selection--single .select2-selection__rendered { color: #444; }
+    body .select2-container { z-index: 11; }
+    body .select2-container--open .select2-dropdown--above {
+        box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
+        overflow: hidden;
+        border-bottom: 1px solid #aaa;
+        border-radius: 5px;
+    }
+    body .select2-container--open .select2-dropdown--below {
+        box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
+        overflow: hidden;
+        border-top: 1px solid #aaa;
+        border-radius: 5px;
+    }
+    body .select2-container--default .select2-selection--single .select2-selection__clear {
+        cursor: pointer;
+        float: left;
+        font-weight: bold;
+        left: 20px;
+    }
+    body .select2-container--default .select2-results>.select2-results__options {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar { width: 5px; }
+    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
+    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-track { background: #f1f1f100; border-radius: 10px; }
+    body .select2-container--default .select2-results>.select2-results__options:hover::-webkit-scrollbar-thumb { background: #c9c9c9; }
+    body .select2-container--default .select2-results__option[aria-selected=true] { background-color: #f6f7f9; }
+    body .select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #5897fb; color: white; }
+    body .select2-container--default.select2-container--disabled .select2-selection--single { background-color: #f6f7f9; cursor: default; filter: opacity(0.5); }
     </style>
-</head>
-<body>
 
     <div id="myDivas">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
         <div class="Prayer-times prayer-times-container" id="settingsDiv">
             <button onclick="window.open('https://wa.me/?text=https://index-ten-beta.vercel.app/')" style="right: auto; left: 0;" class="material-symbols-outlined times-button"><span>share</span></button>
             <button onclick="scrollToDiv('section-4', this)" class="material-symbols-outlined times-button"><span>code</span></button>
@@ -435,6 +437,8 @@ border-collapse: collapse;
                     <button onclick="scrollToDiv('section-1', this)">اوقات الصلاة</button>
                 </div>
                 <div class="prayer-div">
+
+                    <!-- ===== قسم أوقات الصلاة ===== -->
                     <div id="section-1" class="prayer-div-div section">
                         <div class="prayer-container">
                             <div class="">
@@ -488,7 +492,7 @@ border-collapse: collapse;
                         </div>
                     </div>
 
-                    <!-- اذكار -->
+                    <!-- ===== قسم الأذكار ===== -->
                     <div class="prayer-div-div section" id="section-2">
                         <span class="ss">اذكار الصباح</span>
                         <div class="prayer-div-list">
@@ -542,9 +546,7 @@ border-collapse: collapse;
                             <gol></gol>
                             <a>التسبيح والتحميد والتكبير</a>
                             <gol></gol>
-                            "سبحان الله" (33 مرة)
-                            "الحمد لله" (33 مرة)
-                            "الله أكبر" (33 مرة)
+                            "سبحان الله" (33 مرة) — "الحمد لله" (33 مرة) — "الله أكبر" (33 مرة)
                             <gol></gol>
                             ثم يتمم المئة بقول: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير"
                             <gol></gol>
@@ -560,7 +562,7 @@ border-collapse: collapse;
                         </div>
                     </div>
 
-                    <!-- ادعية -->
+                    <!-- ===== قسم الأدعية ===== -->
                     <div id="section-3" class="prayer-div-div section">
                         <span class="ss">ادعيه</span>
                         <div class="prayer-div-list copyable" style="margin-top: 10px;">اللهم إني أسألك العفو والعافية في الدنيا والآخرة</div>
@@ -575,7 +577,7 @@ border-collapse: collapse;
                         <div class="prayer-div-list copyable">اللهم ارزقني حسن الخاتمة واغفر لي ولوالدي وللمسلمين أجمعين</div>
                     </div>
 
-                    <!-- iframe -->
+                    <!-- ===== قسم الـ iframe ===== -->
                     <div id="section-4" class="prayer-div-div section">
                         <span class="ss">< iframe > التضمين بموقعك</span>
                         <textarea readonly class="c-sec copyable"><iframe src="https://index-ten-beta.vercel.app/" frameborder="0"></iframe></textarea>
@@ -583,6 +585,7 @@ border-collapse: collapse;
                         <span class="ss">🤲 هذا ماتيسر لا تنسانا من صالح دعائك</span>
                         <div class="good cor">تم الإصدار عام ,١٠/١/٢٠٢٤م<br><span><a href="#" style="text-decoration: none;color: #4d4d4d;">Quran recited AI</a> جميع الحقوق محفوظة لدى</span></div>
                     </div>
+
                 </div>
             </div>
             <p id="message"></p>
@@ -599,18 +602,159 @@ border-collapse: collapse;
         </div>
     </div>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
     <script>
-    // ========== دالة تحويل الأرقام إلى عربية ==========
+    // =============================================
+    // طريقة الحساب لكل دولة (method في aladhan API)
+    // 1  = University of Islamic Sciences, Karachi
+    // 2  = Islamic Society of North America (ISNA)
+    // 3  = Muslim World League (MWL) — يُستخدم لمعظم الدول العربية
+    // 4  = Umm Al-Qura University, Makkah — المملكة العربية السعودية والخليج
+    // 5  = Egyptian General Authority of Survey
+    // 7  = Institute of Geophysics, University of Tehran
+    // 8  = Gulf Region
+    // 9  = Kuwait
+    // 10 = Qatar
+    // 11 = Majlis Ugama Islam Singapura
+    // 12 = Union Organization Islamic de France
+    // 13 = Diyanet İşleri Başkanlığı, Turkey
+    // 14 = Spiritual Administration of Muslims of Russia
+    // =============================================
+    const countryMethodMap = {
+        "السعودية":    4,
+        "الإمارات":   8,
+        "الكويت":     9,
+        "قطر":        10,
+        "البحرين":    8,
+        "عمان":       8,
+        "مصر":        5,
+        "الجزائر":    3,
+        "المغرب":     3,
+        "السودان":    3,
+        "سوريا":      3,
+        "لبنان":      3,
+        "الأردن":     3,
+        "تونس":       3,
+        "العراق":     3,
+        "اليمن":      4,
+        "ليبيا":      3,
+        "موريتانيا":  3,
+        "جيبوتي":     3,
+        "فلسطين":     3,
+        "الصومال":    3,
+        "جزر القمر":  3,
+        "إريتريا":    3,
+        "جنوب السودان": 3
+    };
+
+    // خريطة ترجمة المدن من العربية إلى الإنجليزية للـ API
+    const cityTranslationMap = {
+        // السعودية
+        "الرياض": "Riyadh", "جدة": "Jeddah", "مكة المكرمة": "Mecca", "المدينة المنورة": "Medina",
+        "الدمام": "Dammam", "الخبر": "Khobar", "الطائف": "Taif", "بريدة": "Buraidah",
+        "أبها": "Abha", "تبوك": "Tabuk", "حائل": "Hail", "نجران": "Najran",
+        "جيزان": "Jizan", "القطيف": "Qatif", "خميس مشيط": "Khamis Mushait",
+        "الهفوف": "Al-Hufuf", "المبرز": "Al-Mubarraz", "الظهران": "Dhahran",
+        "الجبيل": "Jubail", "ينبع": "Yanbu", "حفر الباطن": "Hafar Al-Batin",
+        "سكاكا": "Sakaka", "عرعر": "Arar", "بيشة": "Bisha", "القنفذة": "Al-Qunfudhah",
+        "الباحة": "Al-Bahah", "الوجه": "Al-Wajh", "ضباء": "Dhuba",
+        "القريات": "Al-Qurayyat", "رفحاء": "Rafha", "الزلفي": "Az-Zulfi",
+        "الخرج": "Al-Kharj", "المجمعة": "Majmaah", "الدوادمي": "Dawadmi",
+        // مصر
+        "القاهرة": "Cairo", "الجيزة": "Giza", "الإسكندرية": "Alexandria",
+        "بورسعيد": "Port Said", "السويس": "Suez", "الإسماعيلية": "Ismailia",
+        "دمياط": "Damietta", "المنصورة": "Mansoura", "طنطا": "Tanta",
+        "الزقازيق": "Zagazig", "بنها": "Benha", "كفر الشيخ": "Kafr El Sheikh",
+        "دمنهور": "Damanhur", "المحلة الكبرى": "El Mahalla El Kubra",
+        "المنيا": "Minya", "أسيوط": "Asyut", "سوهاج": "Sohag",
+        "قنا": "Qena", "الأقصر": "Luxor", "أسوان": "Aswan",
+        "الفيوم": "Faiyum", "بني سويف": "Beni Suef", "الغردقة": "Hurghada",
+        "شرم الشيخ": "Sharm el-Sheikh",
+        // الإمارات
+        "دبي": "Dubai", "أبو ظبي": "Abu Dhabi", "أبوظبي": "Abu Dhabi",
+        "الشارقة": "Sharjah", "العين": "Al Ain", "رأس الخيمة": "Ras Al Khaimah",
+        "الفجيرة": "Fujairah", "عجمان": "Ajman", "أم القيوين": "Umm Al Quwain",
+        "خورفكان": "Khor Fakkan",
+        // الكويت
+        "مدينة الكويت": "Kuwait City", "حولي": "Hawalli", "الأحمدي": "Ahmadi",
+        "الفروانية": "Al Farwaniyah", "الجهراء": "Al Jahra",
+        "مبارك الكبير": "Mubarak Al-Kabeer",
+        // قطر
+        "الدوحة": "Doha", "الريان": "Al Rayyan", "الوكرة": "Al Wakrah",
+        "الخور": "Al Khor", "أم صلال": "Umm Salal",
+        // الجزائر
+        "الجزائر العاصمة": "Algiers", "وهران": "Oran", "قسنطينة": "Constantine",
+        "عنابة": "Annaba", "البليدة": "Blida", "باتنة": "Batna",
+        "سطيف": "Setif", "تيزي وزو": "Tizi Ouzou", "بشار": "Bechar",
+        "بجاية": "Bejaia", "تمنراست": "Tamanrasset", "تلمسان": "Tlemcen",
+        "ورقلة": "Ouargla", "بسكرة": "Biskra",
+        // المغرب
+        "الرباط": "Rabat", "الدار البيضاء": "Casablanca", "مراكش": "Marrakech",
+        "فاس": "Fes", "طنجة": "Tangier", "مكناس": "Meknes",
+        "تطوان": "Tetouan", "وجدة": "Oujda", "أغادير": "Agadir",
+        "القنيطرة": "Kenitra",
+        // السودان
+        "الخرطوم": "Khartoum", "أم درمان": "Omdurman", "بحري": "Bahri",
+        "بورتسودان": "Port Sudan", "كسلا": "Kassala", "الأبيض": "El Obeid",
+        // سوريا
+        "دمشق": "Damascus", "حلب": "Aleppo", "حمص": "Homs",
+        "حماة": "Hama", "اللاذقية": "Latakia", "طرطوس": "Tartus",
+        "إدلب": "Idlib", "دير الزور": "Deir ez-Zor",
+        // لبنان
+        "بيروت": "Beirut", "طرابلس": "Tripoli", "صيدا": "Sidon",
+        "صور": "Tyre", "جبيل": "Byblos", "بعلبك": "Baalbek", "زحلة": "Zahle",
+        // الأردن
+        "عمان": "Amman", "الزرقاء": "Zarqa", "إربد": "Irbid",
+        "العقبة": "Aqaba", "السلط": "As-Salt", "الكرك": "Karak",
+        "معان": "Maan", "مادبا": "Madaba", "جرش": "Jerash",
+        // تونس
+        "تونس": "Tunis", "صفاقس": "Sfax", "سوسة": "Sousse",
+        "بنزرت": "Bizerte", "قابس": "Gabes", "القيروان": "Kairouan",
+        // العراق
+        "بغداد": "Baghdad", "البصرة": "Basra", "الموصل": "Mosul",
+        "أربيل": "Erbil", "النجف": "Najaf", "كربلاء": "Karbala",
+        "دهوك": "Dohuk", "السليمانية": "Sulaymaniyah", "الكوت": "Kut",
+        "بعقوبة": "Baqubah", "سامراء": "Samarra", "الرمادي": "Ramadi",
+        "الفلوجة": "Fallujah", "تكريت": "Tikrit", "الحلة": "Hilla",
+        // اليمن
+        "صنعاء": "Sanaa", "عدن": "Aden", "تعز": "Taiz",
+        "الحديدة": "Hodeidah", "إب": "Ibb", "مأرب": "Marib",
+        // ليبيا
+        "طرابلس": "Tripoli", "بنغازي": "Benghazi", "مصراتة": "Misrata",
+        "سبها": "Sabha", "درنة": "Derna",
+        // موريتانيا
+        "نواكشوط": "Nouakchott", "نواذيبو": "Nouadhibou",
+        // البحرين
+        "المنامة": "Manama", "المحرق": "Muharraq",
+        // عمان
+        "مسقط": "Muscat", "صلالة": "Salalah", "نزوى": "Nizwa",
+        "صور": "Sur", "البريمي": "Buraimi", "صحار": "Sohar",
+        // فلسطين
+        "القدس": "Jerusalem", "رام الله": "Ramallah", "نابلس": "Nablus",
+        "بيت لحم": "Bethlehem", "الخليل": "Hebron", "جنين": "Jenin",
+        "طولكرم": "Tulkarm", "غزة": "Gaza", "خان يونس": "Khan Yunis",
+        "رفح": "Rafah",
+        // جيبوتي
+        "جيبوتي (العاصمة)": "Djibouti",
+        // الصومال
+        "مقديشو (العاصمة)": "Mogadishu", "هرجيسا": "Hargeisa",
+        "بوساسو": "Bosaso", "كيسمايو": "Kismayo",
+        // جزر القمر
+        "موروني (العاصمة)": "Moroni",
+        // إريتريا
+        "أسمرة (العاصمة)": "Asmara", "مصوع": "Massawa",
+        // جنوب السودان
+        "جوبا (العاصمة)": "Juba"
+    };
+
+    // =============================================
+    // دالة تحويل الأرقام إلى عربية
+    // =============================================
     function toArabicNumerals(str) {
         if (!str) return str;
         return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
 
-    // ========== تحويل الوقت من HH:mm إلى صيغة ص/م بأرقام عربية ==========
+    // تحويل الوقت من HH:mm إلى صيغة ص/م بأرقام عربية
     function formatTimeArabic(timeStr) {
         if (!timeStr || timeStr === '--:--') return '--:--';
         const parts = timeStr.split(':');
@@ -623,42 +767,32 @@ border-collapse: collapse;
         return `${hStr}:${mStr} ${period}`;
     }
 
-    // ========== select2 مع منع الفوكس التلقائي ==========
+    // =============================================
+    // select2 — بدون حقل بحث (minimumResultsForSearch: Infinity)
+    // =============================================
     $(document).ready(function () {
         $('.mySelect').select2({
             placeholder: "اختر من القائمة",
-            allowClear: true
+            allowClear: true,
+            minimumResultsForSearch: Infinity   // ← يُخفي حقل البحث تماماً، لا فوكس
         });
 
-        // منع الفوكس التلقائي على خانة البحث عند فتح القائمة
+        // طبقة إضافية: إزالة أي فوكس تلقائي محتمل
         $(document).on('select2:open', function () {
-            // إزالة الفوكس من حقل البحث فوراً
-            setTimeout(function () {
-                const searchField = document.querySelector('.select2-container--open .select2-search__field');
-                if (searchField) {
-                    searchField.blur();
-                }
-            }, 0);
-        });
-
-        $('.mySelect').on('select2:open', function () {
-            let selectedOption = $(this).find(':selected').text();
-            setTimeout(function () {
-                let searchField = document.querySelector('.select2-container--open .select2-search__field');
-                if (searchField) {
-                    searchField.setAttribute('placeholder', selectedOption || 'ابحث هنا');
-                    searchField.blur();
-                }
-            }, 0);
+            const focused = document.activeElement;
+            if (focused && focused.tagName === 'INPUT') {
+                focused.blur();
+            }
+            // منع الفوكس على أي input داخل dropdown
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.select2-container--open input').forEach(el => el.blur());
+            });
         });
     });
-    </script>
 
-    <script>
-    // ========== Prayer times logic ==========
-    let countdownTimeout = null;
-    let adhanTimeout = null;
-
+    // =============================================
+    // LocalStorage
+    // =============================================
     function saveToLocalStorage(country, city, timings) {
         localStorage.setItem('selectedCountry', country);
         localStorage.setItem('selectedCity', city);
@@ -666,13 +800,15 @@ border-collapse: collapse;
     }
 
     function loadFromLocalStorage() {
-        const savedCountry = localStorage.getItem('selectedCountry');
-        const savedCity = localStorage.getItem('selectedCity');
-        const savedTimings = JSON.parse(localStorage.getItem('prayerTimings'));
+        const savedCountry  = localStorage.getItem('selectedCountry');
+        const savedCity     = localStorage.getItem('selectedCity');
+        const savedTimings  = JSON.parse(localStorage.getItem('prayerTimings'));
         return { savedCountry, savedCity, savedTimings };
     }
 
-    // تحديث عرض الأوقات في الجدول
+    // =============================================
+    // عرض الأوقات في الجدول
+    // =============================================
     function displayTimings(timings, container) {
         container.querySelector('.fajr-time').textContent    = formatTimeArabic(timings.Fajr);
         container.querySelector('.sunrise-time').textContent = formatTimeArabic(timings.Sunrise);
@@ -682,18 +818,14 @@ border-collapse: collapse;
         container.querySelector('.isha-time').textContent    = formatTimeArabic(timings.Isha);
     }
 
-    // استرجاع وعرض البيانات المحفوظة بعد الريلود
+    // استرجاع وعرض البيانات المحفوظة بعد إعادة التحميل
     function updateUIFromLocalStorage(container) {
         const { savedCountry, savedCity, savedTimings } = loadFromLocalStorage();
-
         if (savedCountry) {
             const countrySelect = container.querySelector('select:nth-of-type(1)');
-            // تعيين القيمة في select الأصلي
             countrySelect.value = savedCountry;
-            // تحديث select2
             $(countrySelect).val(savedCountry).trigger('change.select2');
-            // تعبئة المدن
-            populateCities(savedCountry, container.querySelector('select:nth-of-type(2)'), function() {
+            populateCities(savedCountry, container.querySelector('select:nth-of-type(2)'), function () {
                 if (savedCity) {
                     const citySelect = container.querySelector('select:nth-of-type(2)');
                     citySelect.value = savedCity;
@@ -701,50 +833,51 @@ border-collapse: collapse;
                 }
             });
         }
-
         if (savedTimings) {
             displayTimings(savedTimings, container);
             updateCountdown(savedTimings, container);
         }
     }
 
+    // =============================================
+    // قائمة الدول والمدن
+    // =============================================
     const countriesAndCities = {
-        "السعودية": ["الرياض", "جدة", "مكة المكرمة", "المدينة المنورة", "الدمام", "الخبر", "الطائف", "بريدة", "أبها", "تبوك", "حائل", "نجران", "جيزان", "القطيف", "خميس مشيط", "الهفوف", "المبرز", "الظهران", "الجبيل", "ينبع", "حفر الباطن", "سكاكا", "عرعر", "بيشة", "القنفذة", "الباحة", "الوجه", "ضباء", "القريات", "رفحاء", "الزلفي", "الخرج", "المجمعة", "الدوادمي", "شرورة", "حوطة بني تميم", "وادي الدواسر", "رأس تنورة", "الحائط", "السليل", "طريف", "رجال ألمع", "بلجرشي", "تنومة", "أحد رفيدة", "تثليث", "الليث", "العلا", "النماص", "بيش", "العارضة", "سراة عبيدة", "محايل عسير", "الطوال", "الريث", "الدرب", "ظهران الجنوب", "ضمد", "بارق", "تربة", "حبونا", "الخرمة", "المخواة", "القويعية", "مرات", "عفيف", "البدائع", "عنيزة", "الأسياح", "النبهانية", "رياض الخبراء", "الشماسية", "المذنب", "الرس", "البكيرية", "خليص", "رابغ", "الكامل", "بحرة", "ثول", "حريملاء", "العيينة", "الدرعية", "حوطة سدير", "تمير", "ضرما", "المزاحمية", "الحريق", "صامطة", "الدائر", "فيفا", "صبيا", "العيدابي", "وادي الفرع", "الحناكية", "المندق", "القرى", "العقيق", "بلجرشي"],
-        "مصر": ["القاهرة", "الجيزة", "الإسكندرية", "بورسعيد", "السويس", "الإسماعيلية", "دمياط", "المنصورة", "طنطا", "الزقازيق", "بنها", "شبين الكوم", "كفر الشيخ", "دمنهور", "المحلة الكبرى", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر", "أسوان", "الفيوم", "بني سويف", "الغردقة", "شرم الشيخ", "مرسى مطروح", "العريش", "رفح", "الشيخ زويد", "الخارجة", "الداخلة", "سيوة", "نويبع", "طابا", "رأس سدر", "أبو زنيمة", "دهب", "سانت كاترين", "قوص", "إدفو", "أرمنت", "القصير", "سفاجا", "مرسى علم", "بلبيس", "أبو كبير", "أبو حماد", "فاقوس", "الحسينية", "ديرب نجم", "منيا القمح", "ههيا", "كفر صقر", "أولاد صقر", "الصالحية الجديدة", "العاشر من رمضان", "مغاغة", "سمالوط", "مطاي", "أبو قرقاص", "بني مزار", "ملوي", "دير مواس", "منفلوط", "البداري", "ساحل سليم", "أبوتيج", "صدفا", "الغنايم", "جرجا", "البلينا", "طهطا", "طما", "المراغة", "أخميم", "دار السلام", "نجع حمادي", "فرشوط", "دشنا", "الوقف", "قوص", "نقادة", "أرمنت", "كوم أمبو", "نصر النوبة", "دراو", "توشكى", "أبوسمبل", "الفشن", "إهناسيا", "الواسطى", "سمسطا", "ببا", "مطوبس", "فوه", "دسوق", "بيلا", "الحامول", "قلين", "سيدى سالم", "الرياض", "مطوبس"],
-        "الإمارات": ["دبي", "أبو ظبي", "الشارقة", "العين", "رأس الخيمة", "الفجيرة", "أبوظبي", "دبي", "الشارقة", "عجمان", "أم القيوين", "رأس الخيمة", "الفجيرة", "العين", "خورفكان", "دبا الفجيرة", "دبا الحصن", "حتا", "الذيد", "مصفوت", "المدام", "فلج المعلا", "مسافي", "ليوا", "الرويس", "دلما", "المرفأ", "زايد", "السلع", "غياثي", "السلع"],
-        "الكويت": ["مدينة الكويت", "حولي", "الأحمدي", "الفروانية", "الجهراء", "العاصمة", "الأحمدي", "الجهراء", "الفروانية", "حولي", "مبارك الكبير", "السالمية", "الفحيحيل", "صباح السالم", "المنقف", "الرميثية", "خيطان", "بيان", "القرين", "الفنطاس", "الجابرية", "المهبولة", "سلوى", "أبو حليفة", "الزور", "الوفرة", "صباح الأحمد", "المسيلة", "الصليبية", "العارضية", "الصليبخات", "الشويخ", "كبد", "العبدلي", "المسايل", "شرق", "الدسمة", "الدعية", "بنيد القار", "مشرف", "الشعب", "النسيم", "النزهة", "القادسية", "اليرموك", "الفيحاء", "العديلية", "الروضة", "السرة", "الصديق", "حطين", "الظهر", "جابر الأحمد", "مدينة سعد العبد الله"],
-        "قطر": ["الدوحة", "الوكرة", "الخور", "الريان", "العاصمة", "الدوحة", "الريان", "الوكرة", "الخور", "الشحانية", "دخان", "مسيعيد", "زكريت", "أم صلال", "الجميلية", "الغارية", "أبو سمرة", "روضة راشد", "أم باب", "الذخيرة", "السيلية", "اللؤلؤة", "الغرافة", "الوجبة", "المرة", "روضة الجهانية", "لوسيل"],
-        "الجزائر": ["الجزائر العاصمة", "وهران", "قسنطينة", "عنابة", "البليدة", "باتنة", "سطيف", "تيزي وزو", "بشار", "بجاية", "تمنراست", "تلمسان", "ورقلة", "بسكرة", "الجلفة", "المدية", "غرداية", "تبسة", "الشلف", "الأغواط", "عين تموشنت", "سوق أهراس", "معسكر", "المسيلة", "سيدي بلعباس", "عين الدفلى", "برج بوعريريج", "ميلة", "تيارت", "تيسمسيلت", "أدرار", "النعامة", "تيبازة", "جيجل", "سعيدة", "خنشلة", "الوادي", "البيض", "غليزان", "أم البواقي"],
-        "المغرب": ["الرباط", "الدار البيضاء", "مراكش", "فاس", "طنجة", "مكناس", "تطوان", "وجدة", "أغادير", "القنيطرة", "بني ملال", "خريبكة", "الجديدة", "سلا", "آسفي", "تارودانت", "العيون", "الناظور", "الراشيدية", "الحسيمة", "قلعة السراغنة", "الصويرة", "تمارة", "تاونات", "سيدي سليمان", "سيدي قاسم", "المحمدية", "العرائش", "الفقيه بن صالح", "تازة", "القصر الكبير", "الداخلة", "الخميسات", "زاكورة", "ورزازات", "تينغير"],
-        "السودان": ["الخرطوم", "أم درمان", "بحري", "بورتسودان", "كسلا", "الأبيض", "الفاشر", "مدني", "عطبرة", "دنقلا", "كادقلي", "سنار", "الدمازين", "كوستي", "القضارف", "نيالا", "الجنينة", "زالنجي", "ود مدني", "شندي", "الحصاحيصا", "رفاعة", "الرهد", "سواكن", "بارا", "أبو جبيهة", "طوكر", "الدلنج", "بابنوسة", "كريمة"],
-        "سوريا": ["دمشق", "حلب", "حمص", "حماة", "اللاذقية", "طرطوس", "إدلب", "دير الزور", "الحسكة", "الرقة", "السويداء", "درعا", "القنيطرة", "الميادين", "البوكمال", "جبلة", "تل أبيض", "منبج", "إعزاز", "الباب", "صلخد", "دوما", "داريا", "الزبداني", "السلمية", "مصياف", "بانياس", "صافيتا", "المالكية", "عامودا"],
-        "لبنان": ["بيروت", "طرابلس", "صيدا", "صور", "جبيل", "بعلبك", "زحلة", "النبطية", "جونية", "عاليه", "بعبدا", "بشري", "بعقلين", "شتورة", "دير القمر", "تبنين", "حاصبيا", "جب جنين", "راشيا", "بنت جبيل"],
-        "الأردن": ["عمان", "الزرقاء", "إربد", "العقبة", "المفرق", "السلط", "الكرك", "معان", "مادبا", "جرش", "عجلون", "الرمثا", "الطفيلة", "الفحيص", "الصويفية", "دير علا", "الشوبك"],
-        "تونس": ["تونس", "صفاقس", "سوسة", "بنزرت", "قابس", "القيروان", "تونس العاصمة", "سوسة", "صفاقس", "نابل", "قفصة", "المهدية", "القيروان", "بنزرت", "سليانة", "جندوبة", "زغوان", "مدنين", "قبلي", "تطاوين", "المنيهلة"],
-        "العراق": ["بغداد", "البصرة", "الموصل", "أربيل", "النجف", "كربلاء", "دهوك", "السليمانية", "الكوت", "بعقوبة", "سامراء", "الرمادي", "الفلوجة", "تكريت", "الحلة"],
-        "اليمن": ["صنعاء", "عدن", "تعز", "الحديدة", "إب", "حضرموت", "ذمار", "البيضاء", "شبوة", "الجوف", "مأرب", "الضالع", "حجة", "المهرة", "لحج"],
-        "ليبيا": ["طرابلس", "بنغازي", "مصراتة", "سبها", "درنة", "الزاوية", "البيضاء", "جادو", "غريان", "اجدابيا", "زليتن", "الخمس", "ترهونة"],
-        "موريتانيا": ["نواكشوط", "نواذيبو", "كيفه", "روصو", "العيون", "أطار", "أكجوجت", "سيلبابي", "كيهيدي", "تجكجة"],
-        "البحرين": ["المنامة", "المحرق", "الرفاع", "الحد", "سترة", "جد حفص", "عيسى", "الدراز", "البديع", "الزلاق"],
-        "عمان": ["مسقط", "صلالة", "نزوى", "بهلاء", "صور", "البريمي", "صحار", "بركاء", "عبري", "سيت", "دماء والطائيين", "مطرح", "الخابورة", "إبراء", "جعلان بني بو علي", "الرستاق", "الكامل والوافي", "وادي المعاول"],
-        "جيبوتي": ["جيبوتي (العاصمة)", "تاجورة", "علي سابيح", "دوراليه", "قوريولي", "بليلة", "فجر", "دمجلي", "عسل", "أوبوك"],
-        "فلسطين": ["القدس", "رام الله", "نابلس", "بيت لحم", "الخليل", "جنين", "طولكرم", "قلقيلية", "أريحا", "سلفيت", "طوباس", "بيت لحم", "غزة", "خان يونس", "رفح", "دير البلح", "خانيونس", "الشجاعية", "الزوايدة", "النصيرات", "المغازي", "بيت لاهيا"],
-        "الصومال": ["مقديشو (العاصمة)", "بوساسو", "هرجيسا", "جالكعيو", "برعو", "كيسمايو", "بيدوا", "بلدوين", "طوسمريب", "جروي", "ملسو", "طوكر", "لوقا"],
-        "جزر القمر": ["موروني (العاصمة)", "موهيلي", "أنجوان", "جزيرة القمر الكبرى", "نينغوي", "موي"],
-        "إريتريا": ["أسمرة (العاصمة)", "كرن", "مصوع", "نيقلا", "تسني", "بارنتو", "دفني", "عدال"],
-        "جنوب السودان": ["جوبا (العاصمة)", "واو", "ملكال", "بور", "ياي", "ملوال", "جوزي", "رياك", "أروب"]
+        "السعودية": ["الرياض","جدة","مكة المكرمة","المدينة المنورة","الدمام","الخبر","الطائف","بريدة","أبها","تبوك","حائل","نجران","جيزان","القطيف","خميس مشيط","الهفوف","المبرز","الظهران","الجبيل","ينبع","حفر الباطن","سكاكا","عرعر","بيشة","القنفذة","الباحة","الوجه","ضباء","القريات","رفحاء","الزلفي","الخرج","المجمعة","الدوادمي"],
+        "مصر": ["القاهرة","الجيزة","الإسكندرية","بورسعيد","السويس","الإسماعيلية","دمياط","المنصورة","طنطا","الزقازيق","بنها","شبين الكوم","كفر الشيخ","دمنهور","المحلة الكبرى","المنيا","أسيوط","سوهاج","قنا","الأقصر","أسوان","الفيوم","بني سويف","الغردقة","شرم الشيخ"],
+        "الإمارات": ["دبي","أبوظبي","الشارقة","العين","رأس الخيمة","الفجيرة","عجمان","أم القيوين","خورفكان"],
+        "الكويت": ["مدينة الكويت","حولي","الأحمدي","الفروانية","الجهراء","مبارك الكبير"],
+        "قطر": ["الدوحة","الريان","الوكرة","الخور","أم صلال"],
+        "الجزائر": ["الجزائر العاصمة","وهران","قسنطينة","عنابة","البليدة","باتنة","سطيف","تيزي وزو","بشار","بجاية","تمنراست","تلمسان","ورقلة","بسكرة","الجلفة","غرداية"],
+        "المغرب": ["الرباط","الدار البيضاء","مراكش","فاس","طنجة","مكناس","تطوان","وجدة","أغادير","القنيطرة","بني ملال","الجديدة","سلا","آسفي"],
+        "السودان": ["الخرطوم","أم درمان","بحري","بورتسودان","كسلا","الأبيض","الفاشر","مدني","عطبرة","دنقلا","كادقلي","سنار","الدمازين","كوستي","القضارف"],
+        "سوريا": ["دمشق","حلب","حمص","حماة","اللاذقية","طرطوس","إدلب","دير الزور","الحسكة","الرقة"],
+        "لبنان": ["بيروت","طرابلس","صيدا","صور","جبيل","بعلبك","زحلة"],
+        "الأردن": ["عمان","الزرقاء","إربد","العقبة","السلط","الكرك","معان","مادبا","جرش","عجلون"],
+        "تونس": ["تونس","صفاقس","سوسة","بنزرت","قابس","القيروان","المهدية","مدنين"],
+        "العراق": ["بغداد","البصرة","الموصل","أربيل","النجف","كربلاء","دهوك","السليمانية","الكوت","بعقوبة","سامراء","الرمادي","الفلوجة","تكريت","الحلة"],
+        "اليمن": ["صنعاء","عدن","تعز","الحديدة","إب","مأرب"],
+        "ليبيا": ["طرابلس","بنغازي","مصراتة","سبها","درنة","الزاوية"],
+        "موريتانيا": ["نواكشوط","نواذيبو"],
+        "البحرين": ["المنامة","المحرق"],
+        "عمان": ["مسقط","صلالة","نزوى","صحار","البريمي"],
+        "جيبوتي": ["جيبوتي (العاصمة)"],
+        "فلسطين": ["القدس","رام الله","نابلس","بيت لحم","الخليل","جنين","طولكرم","غزة","خان يونس","رفح"],
+        "الصومال": ["مقديشو (العاصمة)","هرجيسا","بوساسو","كيسمايو"],
+        "جزر القمر": ["موروني (العاصمة)"],
+        "إريتريا": ["أسمرة (العاصمة)","مصوع"],
+        "جنوب السودان": ["جوبا (العاصمة)"]
     };
 
     function handleCountryChange(selectElement) {
         const selectedCountry = selectElement.value;
         const citySelect = selectElement.closest('.prayer-container').querySelector('select:nth-of-type(2)');
         populateCities(selectedCountry, citySelect);
-        // تحديث select2 للمدن
         $(citySelect).val('').trigger('change.select2');
     }
 
     function handleCityChange(selectElement) {
-        const selectedCity = selectElement.value;
+        const selectedCity    = selectElement.value;
         const selectedCountry = selectElement.closest('.prayer-container').querySelector('select:nth-of-type(1)').value;
         if (selectedCity && selectedCountry) {
             fetchPrayerTimes(selectedCity, selectedCountry, selectElement);
@@ -760,7 +893,6 @@ border-collapse: collapse;
         }
     }
 
-    // populateCities مع callback اختياري بعد الانتهاء
     function populateCities(country, citySelect, callback) {
         citySelect.innerHTML = '<option value="">اختر المدينة</option>';
         citySelect.disabled = true;
@@ -773,49 +905,84 @@ border-collapse: collapse;
                 citySelect.appendChild(option);
             });
         }
-        // تحديث select2 بعد تعبئة الخيارات
         $(citySelect).trigger('change.select2');
         if (typeof callback === 'function') callback();
     }
 
     window.onload = function () {
-        const container = document.querySelector('.prayer-container');
+        const container    = document.querySelector('.prayer-container');
         const countrySelect = container.querySelector('select:nth-of-type(1)');
         populateCountries(countrySelect);
-        // تحديث select2 بعد تعبئة الدول
         $(countrySelect).trigger('change.select2');
-        // استرجاع آخر اختيار للمستخدم تلقائياً
         updateUIFromLocalStorage(container);
         updateDate();
         setInterval(updateDate, 24 * 60 * 60 * 1000);
     };
 
+    // =============================================
+    // جلب أوقات الصلاة — aladhan.com
+    // يستخدم إحداثيات دقيقة + method مناسب لكل دولة
+    // =============================================
     function fetchPrayerTimes(city, country, selectElement) {
-        const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
+        const cityEn   = cityTranslationMap[city] || city;
+        const method   = countryMethodMap[country] || 3;
+
+        // نستخدم timingsByCity مع اسم الدولة بالإنجليزية
+        const countryEnMap = {
+            "السعودية": "Saudi Arabia", "مصر": "Egypt", "الإمارات": "United Arab Emirates",
+            "الكويت": "Kuwait", "قطر": "Qatar", "الجزائر": "Algeria",
+            "المغرب": "Morocco", "السودان": "Sudan", "سوريا": "Syria",
+            "لبنان": "Lebanon", "الأردن": "Jordan", "تونس": "Tunisia",
+            "العراق": "Iraq", "اليمن": "Yemen", "ليبيا": "Libya",
+            "موريتانيا": "Mauritania", "البحرين": "Bahrain", "عمان": "Oman",
+            "جيبوتي": "Djibouti", "فلسطين": "Palestine", "الصومال": "Somalia",
+            "جزر القمر": "Comoros", "إريتريا": "Eritrea", "جنوب السودان": "South Sudan"
+        };
+        const countryEn = countryEnMap[country] || country;
+
+        // نأخذ التاريخ الحالي لضمان دقة الأوقات ليوم اليوم
+        const today   = new Date();
+        const dd      = String(today.getDate()).padStart(2, '0');
+        const mm      = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy    = today.getFullYear();
+        const dateStr = `${dd}-${mm}-${yyyy}`;
+
+        const apiUrl = `https://api.aladhan.com/v1/timingsByCity/${dateStr}?city=${encodeURIComponent(cityEn)}&country=${encodeURIComponent(countryEn)}&method=${method}`;
+
         fetch(apiUrl)
-            .then(response => response.json())
+            .then(r => r.json())
             .then(data => {
-                const timings = data.data.timings;
+                if (data.code !== 200) {
+                    console.error('API error:', data);
+                    return;
+                }
+                const timings   = data.data.timings;
                 const container = selectElement.closest('.prayer-container');
                 displayTimings(timings, container);
                 const selectedCountry = container.querySelector('select:nth-of-type(1)').value;
-                const selectedCity = container.querySelector('select:nth-of-type(2)').value;
+                const selectedCity    = container.querySelector('select:nth-of-type(2)').value;
                 saveToLocalStorage(selectedCountry, selectedCity, timings);
                 updateCountdown(timings, container);
-            });
+            })
+            .catch(err => console.error('Fetch error:', err));
     }
+
+    // =============================================
+    // Countdown
+    // =============================================
+    let countdownTimeout = null;
+    let adhanTimeout     = null;
 
     function updateCountdown(timings, container) {
         if (countdownTimeout) clearTimeout(countdownTimeout);
 
         const now = moment();
-        // الشروق لا يُحسب كوقت صلاة في العداد
         const prayerTimes = [
-            { row: container.querySelector('.fajr-prayer-row'),    time: moment(timings.Fajr, "HH:mm") },
-            { row: container.querySelector('.dhuhr-prayer-row'),   time: moment(timings.Dhuhr, "HH:mm") },
-            { row: container.querySelector('.asr-prayer-row'),     time: moment(timings.Asr, "HH:mm") },
+            { row: container.querySelector('.fajr-prayer-row'),    time: moment(timings.Fajr,    "HH:mm") },
+            { row: container.querySelector('.dhuhr-prayer-row'),   time: moment(timings.Dhuhr,   "HH:mm") },
+            { row: container.querySelector('.asr-prayer-row'),     time: moment(timings.Asr,     "HH:mm") },
             { row: container.querySelector('.maghrib-prayer-row'), time: moment(timings.Maghrib, "HH:mm") },
-            { row: container.querySelector('.isha-prayer-row'),    time: moment(timings.Isha, "HH:mm") }
+            { row: container.querySelector('.isha-prayer-row'),    time: moment(timings.Isha,    "HH:mm") }
         ];
 
         let nextPrayer = null;
@@ -831,14 +998,11 @@ border-collapse: collapse;
         if (nextPrayer) {
             nextPrayer.row.classList.add('highlighted-next-prayer');
             const diff = nextPrayer.time.diff(now);
-
-            // العداد بأرقام عربية
             const hh = toArabicNumerals(Math.floor(diff / 3600000).toString().padStart(2, '0'));
             const mm = toArabicNumerals((Math.floor(diff / 60000) % 60).toString().padStart(2, '0'));
             const ss = toArabicNumerals((Math.floor(diff / 1000) % 60).toString().padStart(2, '0'));
             container.querySelector('.prayer-countdown-timer').textContent = `${hh}:${mm}:${ss}`;
             container.querySelector('.next-prayer-time').textContent = formatTimeArabic(nextPrayer.time.format("HH:mm"));
-
             if (diff < 1000 * 60) showAdhanAlert();
             countdownTimeout = setTimeout(() => updateCountdown(timings, container), 1000);
         } else {
@@ -849,7 +1013,7 @@ border-collapse: collapse;
 
     function showAdhanAlert() {
         const adhanAlertDiv = document.getElementById('adhan-alert-container');
-        const adhanAudio = document.getElementById('adhan-audio');
+        const adhanAudio    = document.getElementById('adhan-audio');
         adhanAlertDiv.style.display = 'flex';
         adhanAudio.play();
         adhanTimeout = setTimeout(() => {
@@ -861,7 +1025,7 @@ border-collapse: collapse;
 
     function closeAdhanAlert() {
         const adhanAlertDiv = document.getElementById('adhan-alert-container');
-        const adhanAudio = document.getElementById('adhan-audio');
+        const adhanAudio    = document.getElementById('adhan-audio');
         adhanAlertDiv.style.display = 'none';
         adhanAudio.pause();
         adhanAudio.currentTime = 0;
@@ -870,11 +1034,10 @@ border-collapse: collapse;
 
     function updateDate() {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const today = new Date();
-        const formattedDate = today.toLocaleDateString('ar-EG', options);
-        document.getElementById('date').innerText = formattedDate;
+        document.getElementById('date').innerText = new Date().toLocaleDateString('ar-EG', options);
     }
 
+    // نسخ الأدعية
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".copyable").forEach(el => {
             el.addEventListener("click", () => {
@@ -887,21 +1050,20 @@ border-collapse: collapse;
                     .catch(() => { document.execCommand("copy"); return Promise.resolve(); })
                     .then(() => {
                         msg.style.display = "block";
-                        msg.textContent = "تم النسخ!";
+                        msg.textContent   = "تم النسخ!";
                         setTimeout(() => { msg.style.display = "none"; sel.removeAllRanges(); }, 3000);
                     });
             });
         });
     });
-    </script>
 
-    <script>
-    // ========== scroll & ripple ==========
+    // =============================================
+    // Scroll & Ripple
+    // =============================================
     let activeButton = null;
 
     function scrollToDiv(divId, button) {
-        const element = document.getElementById(divId);
-        element.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById(divId).scrollIntoView({ behavior: 'smooth' });
         if (activeButton) activeButton.classList.remove('active');
         button.classList.add('active');
         activeButton = button;
@@ -923,98 +1085,18 @@ border-collapse: collapse;
     function createRipple(event) {
         const button = event.currentTarget;
         const ripple = document.createElement("span");
-        const rect = button.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = event.clientX - rect.left - size / 2;
-        const y = event.clientY - rect.top - size / 2;
+        const rect   = button.getBoundingClientRect();
+        const size   = Math.max(rect.width, rect.height);
+        const x      = event.clientX - rect.left - size / 2;
+        const y      = event.clientY - rect.top  - size / 2;
         ripple.style.width = ripple.style.height = `${size}px`;
-        ripple.style.left = x + "px";
-        ripple.style.top = y + "px";
+        ripple.style.left  = x + "px";
+        ripple.style.top   = y + "px";
         ripple.classList.add("ripple");
         button.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
     }
     </script>
-
-    <style>
-    body .select2-container .select2-selection--single {
-        font-family: system-ui;
-        cursor: pointer;
-        outline: none;
-        margin: 0 5px;
-        border: none;
-        border-radius: 7px;
-        color: #677483;
-        background-color: #f6f7f9;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-image: url(image/download.png);
-        background-repeat: no-repeat;
-        background-position: calc(100% - 8px) center;
-        background-size: 10px;
-        height: 34px;
-    }
-    body .select2-container--default .select2-selection--single .select2-selection__arrow { display: none; }
-    body .select2-container .select2-selection--single .select2-selection__rendered {
-        overflow: hidden;
-        padding: 3px 0;
-    }
-    body .select2-container--default .select2-search--dropdown .select2-search__field {
-        text-align: right;
-        font-family: system-ui;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: #f6f7f9;
-        color: #677483;
-    }
-    body .select2-container--default .select2-results__option {
-    padding: 10px 13px;
-    margin: 0 4px;
-    margin-right: 0;
-    text-align: right;
-    color: #677483;
-    background-color: #f6f7f900;
-    font-family: system-ui;
-    border-radius: 10px;
-    }
-    body .select2-container--default .select2-results__option--highlighted {
-        background-color: #e2e6ea;
-        color: #333;
-    }
-    body .select2-container--default .select2-selection--single .select2-selection__rendered { color: #444; }
-    body .select2-container { z-index: 11; }
-    body .select2-container--open .select2-dropdown--above {
-        box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
-        overflow: hidden;
-        border-bottom: 1px solid #aaa;
-        border-radius: 5px;
-    }
-    body .select2-container--open .select2-dropdown--below {
-        box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
-        overflow: hidden;
-        border-top: 1px solid #aaa;
-        border-radius: 5px;
-    }
-    body .select2-container--default .select2-selection--single .select2-selection__clear {
-        cursor: pointer;
-        float: left;
-        font-weight: bold;
-        left: 20px;
-    }
-    body .select2-container--default .select2-results>.select2-results__options {
-        max-height: 400px;
-        overflow-y: auto;
-    }
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar { width: 5px; }
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-track { background: #f1f1f100; border-radius: 10px; }
-    body .select2-container--default .select2-results>.select2-results__options:hover::-webkit-scrollbar-thumb { background: #c9c9c9; }
-    body .select2-container--default .select2-results__option[aria-selected=true] { background-color: #f6f7f9; }
-    body .select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #5897fb; color: white; }
-    body .select2-container--default.select2-container--disabled .select2-selection--single { background-color: #f6f7f9; cursor: default; filter: opacity(0.5); }
-    </style>
 
 </body>
 </html>
