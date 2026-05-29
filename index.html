@@ -632,26 +632,20 @@ border-collapse: collapse;
         allowClear: true
     });
 
-    // منع الفوكس التلقائي على خانة البحث عند فتح القائمة
-    $(document).on('select2:open', function () {
-        const searchField = document.querySelector('.select2-container--open .select2-search__field');
-        if (searchField) {
-            searchField.setAttribute('readonly', 'readonly'); // يمنع لوحة المفاتيح على الموبايل
-        }
-    });
-
     $('.mySelect').on('select2:open', function () {
         const selectedOption = $(this).find(':selected').text();
 
-        const searchField = document.querySelector('.select2-container--open .select2-search__field');
-        if (searchField) {
-            searchField.setAttribute('placeholder', selectedOption || 'ابحث هنا');
-        }
-    });
-
-    // عند الكتابة: أزل readonly حتى يتمكن من البحث
-    $(document).on('keydown', '.select2-search__field', function () {
-        $(this).removeAttr('readonly');
+        // requestAnimationFrame أسرع وأدق من setTimeout على الموبايل
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                const searchField = document.querySelector('.select2-container--open .select2-search__field');
+                if (searchField) {
+                    searchField.setAttribute('placeholder', selectedOption || 'ابحث هنا');
+                    searchField.blur();
+                    searchField.setAttribute('tabindex', '-1'); // يمنع الوصول بالـ Tab
+                }
+            });
+        });
     });
 });
     </script>
