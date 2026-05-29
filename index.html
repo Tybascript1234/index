@@ -146,6 +146,11 @@ position: fixed;
     height: 36px;
     list-style: 0;
     }
+    .flex {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
     .location-picker-title {
         color: #677483;
         font-size: 17px;
@@ -559,6 +564,13 @@ border-collapse: collapse;
         transform: scale(0.95);
         opacity: .6;
     }
+    .ccvve {
+        margin: 0 10px;
+        font-size: 18px;
+        color: #677483;
+        font-weight: 500;
+        display: none;
+    }
     </style>
 </head>
 <body>
@@ -741,8 +753,11 @@ border-collapse: collapse;
     <div class="location-picker-layer" onclick="closeLocationPicker(event)">
         <div class="location-picker-panel country-picker-panel" data-picker="country" onclick="event.stopPropagation()">
             <div class="location-picker-header">
-                <span class="location-picker-title">اختر الدولة</span>
-                <button type="button" class="location-picker-close" onclick="closeLocationPicker()"><span class="material-symbols-outlined">close</span></button>
+                <span class="ccvve">0</span>
+                <div class="flex">
+                   <span class="location-picker-title">اختر الدولة</span>
+                    <button type="button" class="location-picker-close" onclick="closeLocationPicker()"><span class="material-symbols-outlined">close</span></button> 
+                </div>
             </div>
             <input type="search" class="location-picker-search country-picker-search" placeholder="ابحث عن دولة" oninput="renderPickerOptions('country', this.value)">
             <div class="location-picker-list country-picker-list"></div>
@@ -750,8 +765,11 @@ border-collapse: collapse;
 
         <div class="location-picker-panel city-picker-panel" data-picker="city" onclick="event.stopPropagation()">
             <div class="location-picker-header">
-                <span class="location-picker-title">اختر المدينة</span>
-                <button type="button" class="location-picker-close" onclick="closeLocationPicker()"><span class="material-symbols-outlined">close</span></button>
+                <span class="ccvve">0</span>
+                <div class="flex">
+                    <span class="location-picker-title">اختر المدينة</span>
+                    <button type="button" class="location-picker-close" onclick="closeLocationPicker()"><span class="material-symbols-outlined">close</span></button>
+                </div>
             </div>
             <input type="search" class="location-picker-search city-picker-search" placeholder="ابحث عن مدينة" oninput="renderPickerOptions('city', this.value)">
             <div class="location-picker-list city-picker-list"></div>
