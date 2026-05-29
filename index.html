@@ -69,9 +69,145 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        gap: 10px;
         margin-top: 20px;
         position: absolute;
         bottom: 8px;
+    }
+    .location-picker-button {
+        cursor: pointer;
+        border: none;
+        min-width: 150px;
+        max-width: 45%;
+        height: 36px;
+        padding: 0 16px;
+        color: #677483;
+        background-color: #f6f7f9;
+        border-radius: 8px;
+        font-family: "Tajawal", sans-serif;
+        font-size: 15px;
+        line-height: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        transition: ease 0.2s;
+    }
+    .location-picker-button:active { background-color: #e8eaec; }
+    .location-picker-button:disabled {
+        cursor: default;
+        opacity: .55;
+    }
+    .location-picker-layer {
+position: fixed;
+    inset: 0;
+    left: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .35);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .45s ease, visibility .45s ease;
+    }
+    .location-picker-layer.show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+    .location-picker-panel {
+        width: min(720px, 100%);
+        height: 80dvh;
+        box-sizing: border-box;
+        margin: 0 14px;
+        padding: 14px;
+        background-color: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 -8px 24px #00000026;
+        transform: translateY(28px);
+        opacity: 0;
+        transition: transform .45s ease, opacity .45s ease;
+        display: none;
+        flex-direction: column;
+        font-family: "Tajawal", sans-serif;
+    }
+    .location-picker-layer.show .location-picker-panel.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .location-picker-panel.active { display: flex; }
+    .location-picker-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+    }
+    .location-picker-title {
+        color: #677483;
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .location-picker-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    color: #677483;
+    background-color: #f6f7f9;
+    font-size: 22px;
+    font-family: math;
+    line-height: 0;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    }
+    .location-picker-search {
+        box-sizing: border-box;
+        width: 100%;
+        height: 42px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 10px;
+        padding: 0 13px;
+        text-align: right;
+        color: #677483;
+        background-color: #f6f7f9;
+        font-family: "Tajawal", sans-serif;
+        font-size: 15px;
+    }
+    .location-picker-list {
+        flex: 1;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        padding-bottom: 6px;
+    }
+    .location-picker-list::-webkit-scrollbar { width: 5px; }
+    .location-picker-list::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
+    .location-picker-option {
+        width: 100%;
+        min-height: 42px;
+        margin: 3px 0;
+        border: none;
+        border-radius: 10px;
+        padding: 8px 12px;
+        text-align: right;
+        color: #677483;
+        background-color: transparent;
+        font-family: "Tajawal", sans-serif;
+        font-size: 16px;
+    }
+    .location-picker-option:active,
+    .location-picker-option.selected {
+        color: #9c7d22;
+        background-color: #faf2d7;
+    }
+    .location-picker-empty {
+        padding: 20px 0;
+        color: #9aa3ad;
+        text-align: center;
+        font-family: "Tajawal", sans-serif;
     }
     .prayer-times-container {
         margin-top: 54px;
@@ -478,12 +614,8 @@ border-collapse: collapse;
                             </div>
 
                             <div class="omg">
-                                <select onchange="handleCountryChange(this)" class="dropdown-selector custom-select mySelect" style="width: 150px;">
-                                    <option value="">اختر الدولة</option>
-                                </select>
-                                <select onchange="handleCityChange(this)" class="dropdown-selector custom-select mySelect" style="width: 150px;">
-                                    <option value="">اختر المدينة</option>
-                                </select>
+                                <button type="button" class="location-picker-button country-picker-button" onclick="openLocationPicker('country')">اختر الدولة</button>
+                                <button type="button" class="location-picker-button city-picker-button" onclick="openLocationPicker('city')" disabled>اختر المدينة</button>
                             </div>
                         </div>
                     </div>
@@ -599,11 +731,25 @@ border-collapse: collapse;
         </div>
     </div>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <div class="location-picker-layer" onclick="closeLocationPicker(event)">
+        <div class="location-picker-panel country-picker-panel" data-picker="country" onclick="event.stopPropagation()">
+            <div class="location-picker-header">
+                <span class="location-picker-title">اختر الدولة</span>
+                <button type="button" class="location-picker-close" onclick="closeLocationPicker()">×</button>
+            </div>
+            <input type="search" class="location-picker-search country-picker-search" placeholder="ابحث عن دولة" oninput="renderPickerOptions('country', this.value)">
+            <div class="location-picker-list country-picker-list"></div>
+        </div>
 
-    <script src="data.js"></script>
+        <div class="location-picker-panel city-picker-panel" data-picker="city" onclick="event.stopPropagation()">
+            <div class="location-picker-header">
+                <span class="location-picker-title">اختر المدينة</span>
+                <button type="button" class="location-picker-close" onclick="closeLocationPicker()">×</button>
+            </div>
+            <input type="search" class="location-picker-search city-picker-search" placeholder="ابحث عن مدينة" oninput="renderPickerOptions('city', this.value)">
+            <div class="location-picker-list city-picker-list"></div>
+        </div>
+    </div>
 
     <script>
     // ========== دالة تحويل الأرقام إلى عربية ==========
@@ -625,43 +771,14 @@ border-collapse: collapse;
         return `${hStr}:${mStr} ${period}`;
     }
 
-    // ========== select2 مع منع الفوكس التلقائي ==========
-    $(document).ready(function () {
-    $('.mySelect').select2({
-        placeholder: "اختر من القائمة",
-        allowClear: true
-    });
-
-    // منع الفوكس التلقائي عند فتح القائمة
-    $(document).on('select2:open', function () {
-        const searchField = document.querySelector('.select2-container--open .select2-search__field');
-        if (searchField) {
-            // تعطيل الفوكس التلقائي مؤقتاً
-            searchField.setAttribute('tabindex', '-1');
-            searchField.addEventListener('focus', function preventFocus(e) {
-                e.target.blur();
-                // بعد أول blur، نعيد تفعيل الفوكس عند النقر
-                searchField.removeEventListener('focus', preventFocus);
-                searchField.removeAttribute('tabindex');
-            }, { once: true });
-        }
-    });
-
-    // تحديث الـ placeholder بالخيار المحدد
-    $('.mySelect').on('select2:open', function () {
-        const selectedOption = $(this).find(':selected').text();
-        const searchField = document.querySelector('.select2-container--open .select2-search__field');
-        if (searchField) {
-            searchField.setAttribute('placeholder', selectedOption || 'ابحث هنا');
-        }
-    });
-});
     </script>
 
     <script>
     // ========== Prayer times logic ==========
     let countdownTimeout = null;
     let adhanTimeout = null;
+    let selectedCountry = '';
+    let selectedCity = '';
 
     function saveToLocalStorage(country, city, timings) {
         localStorage.setItem('selectedCountry', country);
@@ -691,19 +808,9 @@ border-collapse: collapse;
         const { savedCountry, savedCity, savedTimings } = loadFromLocalStorage();
 
         if (savedCountry) {
-            const countrySelect = container.querySelector('select:nth-of-type(1)');
-            // تعيين القيمة في select الأصلي
-            countrySelect.value = savedCountry;
-            // تحديث select2
-            $(countrySelect).val(savedCountry).trigger('change.select2');
-            // تعبئة المدن
-            populateCities(savedCountry, container.querySelector('select:nth-of-type(2)'), function() {
-                if (savedCity) {
-                    const citySelect = container.querySelector('select:nth-of-type(2)');
-                    citySelect.value = savedCity;
-                    $(citySelect).val(savedCity).trigger('change.select2');
-                }
-            });
+            selectedCountry = savedCountry;
+            selectedCity = savedCity || '';
+            updatePickerButtons(container);
         }
 
         if (savedTimings) {
@@ -712,71 +819,134 @@ border-collapse: collapse;
         }
     }
 
-    function handleCountryChange(selectElement) {
-        const selectedCountry = selectElement.value;
-        const citySelect = selectElement.closest('.prayer-container').querySelector('select:nth-of-type(2)');
-        populateCities(selectedCountry, citySelect);
-        // تحديث select2 للمدن
-        $(citySelect).val('').trigger('change.select2');
+    const countriesAndCities = {
+        "السعودية": ["الرياض", "جدة", "مكة المكرمة", "المدينة المنورة", "الدمام", "الخبر", "الطائف", "بريدة", "أبها", "تبوك", "حائل", "نجران", "جيزان", "القطيف", "خميس مشيط", "الهفوف", "المبرز", "الظهران", "الجبيل", "ينبع", "حفر الباطن", "سكاكا", "عرعر", "بيشة", "القنفذة", "الباحة", "الوجه", "ضباء", "القريات", "رفحاء", "الزلفي", "الخرج", "المجمعة", "الدوادمي", "شرورة", "حوطة بني تميم", "وادي الدواسر", "رأس تنورة", "الحائط", "السليل", "طريف", "رجال ألمع", "بلجرشي", "تنومة", "أحد رفيدة", "تثليث", "الليث", "العلا", "النماص", "بيش", "العارضة", "سراة عبيدة", "محايل عسير", "الطوال", "الريث", "الدرب", "ظهران الجنوب", "ضمد", "بارق", "تربة", "حبونا", "الخرمة", "المخواة", "القويعية", "مرات", "عفيف", "البدائع", "عنيزة", "الأسياح", "النبهانية", "رياض الخبراء", "الشماسية", "المذنب", "الرس", "البكيرية", "خليص", "رابغ", "الكامل", "بحرة", "ثول", "حريملاء", "العيينة", "الدرعية", "حوطة سدير", "تمير", "ضرما", "المزاحمية", "الحريق", "صامطة", "الدائر", "فيفا", "صبيا", "العيدابي", "وادي الفرع", "الحناكية", "المندق", "القرى", "العقيق", "بلجرشي"],
+        "مصر": ["القاهرة", "الجيزة", "الإسكندرية", "بورسعيد", "السويس", "الإسماعيلية", "دمياط", "المنصورة", "طنطا", "الزقازيق", "بنها", "شبين الكوم", "كفر الشيخ", "دمنهور", "المحلة الكبرى", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر", "أسوان", "الفيوم", "بني سويف", "الغردقة", "شرم الشيخ", "مرسى مطروح", "العريش", "رفح", "الشيخ زويد", "الخارجة", "الداخلة", "سيوة", "نويبع", "طابا", "رأس سدر", "أبو زنيمة", "دهب", "سانت كاترين", "قوص", "إدفو", "أرمنت", "القصير", "سفاجا", "مرسى علم", "بلبيس", "أبو كبير", "أبو حماد", "فاقوس", "الحسينية", "ديرب نجم", "منيا القمح", "ههيا", "كفر صقر", "أولاد صقر", "الصالحية الجديدة", "العاشر من رمضان", "مغاغة", "سمالوط", "مطاي", "أبو قرقاص", "بني مزار", "ملوي", "دير مواس", "منفلوط", "البداري", "ساحل سليم", "أبوتيج", "صدفا", "الغنايم", "جرجا", "البلينا", "طهطا", "طما", "المراغة", "أخميم", "دار السلام", "نجع حمادي", "فرشوط", "دشنا", "الوقف", "قوص", "نقادة", "أرمنت", "كوم أمبو", "نصر النوبة", "دراو", "توشكى", "أبوسمبل", "الفشن", "إهناسيا", "الواسطى", "سمسطا", "ببا", "مطوبس", "فوه", "دسوق", "بيلا", "الحامول", "قلين", "سيدى سالم", "الرياض", "مطوبس"],
+        "الإمارات": ["دبي", "أبو ظبي", "الشارقة", "العين", "رأس الخيمة", "الفجيرة", "أبوظبي", "دبي", "الشارقة", "عجمان", "أم القيوين", "رأس الخيمة", "الفجيرة", "العين", "خورفكان", "دبا الفجيرة", "دبا الحصن", "حتا", "الذيد", "مصفوت", "المدام", "فلج المعلا", "مسافي", "ليوا", "الرويس", "دلما", "المرفأ", "زايد", "السلع", "غياثي", "السلع"],
+        "الكويت": ["مدينة الكويت", "حولي", "الأحمدي", "الفروانية", "الجهراء", "العاصمة", "الأحمدي", "الجهراء", "الفروانية", "حولي", "مبارك الكبير", "السالمية", "الفحيحيل", "صباح السالم", "المنقف", "الرميثية", "خيطان", "بيان", "القرين", "الفنطاس", "الجابرية", "المهبولة", "سلوى", "أبو حليفة", "الزور", "الوفرة", "صباح الأحمد", "المسيلة", "الصليبية", "العارضية", "الصليبخات", "الشويخ", "كبد", "العبدلي", "المسايل", "شرق", "الدسمة", "الدعية", "بنيد القار", "مشرف", "الشعب", "النسيم", "النزهة", "القادسية", "اليرموك", "الفيحاء", "العديلية", "الروضة", "السرة", "الصديق", "حطين", "الظهر", "جابر الأحمد", "مدينة سعد العبد الله"],
+        "قطر": ["الدوحة", "الوكرة", "الخور", "الريان", "العاصمة", "الدوحة", "الريان", "الوكرة", "الخور", "الشحانية", "دخان", "مسيعيد", "زكريت", "أم صلال", "الجميلية", "الغارية", "أبو سمرة", "روضة راشد", "أم باب", "الذخيرة", "السيلية", "اللؤلؤة", "الغرافة", "الوجبة", "المرة", "روضة الجهانية", "لوسيل"],
+        "الجزائر": ["الجزائر العاصمة", "وهران", "قسنطينة", "عنابة", "البليدة", "باتنة", "سطيف", "تيزي وزو", "بشار", "بجاية", "تمنراست", "تلمسان", "ورقلة", "بسكرة", "الجلفة", "المدية", "غرداية", "تبسة", "الشلف", "الأغواط", "عين تموشنت", "سوق أهراس", "معسكر", "المسيلة", "سيدي بلعباس", "عين الدفلى", "برج بوعريريج", "ميلة", "تيارت", "تيسمسيلت", "أدرار", "النعامة", "تيبازة", "جيجل", "سعيدة", "خنشلة", "الوادي", "البيض", "غليزان", "أم البواقي"],
+        "المغرب": ["الرباط", "الدار البيضاء", "مراكش", "فاس", "طنجة", "مكناس", "تطوان", "وجدة", "أغادير", "القنيطرة", "بني ملال", "خريبكة", "الجديدة", "سلا", "آسفي", "تارودانت", "العيون", "الناظور", "الراشيدية", "الحسيمة", "قلعة السراغنة", "الصويرة", "تمارة", "تاونات", "سيدي سليمان", "سيدي قاسم", "المحمدية", "العرائش", "الفقيه بن صالح", "تازة", "القصر الكبير", "الداخلة", "الخميسات", "زاكورة", "ورزازات", "تينغير"],
+        "السودان": ["الخرطوم", "أم درمان", "بحري", "بورتسودان", "كسلا", "الأبيض", "الفاشر", "مدني", "عطبرة", "دنقلا", "كادقلي", "سنار", "الدمازين", "كوستي", "القضارف", "نيالا", "الجنينة", "زالنجي", "ود مدني", "شندي", "الحصاحيصا", "رفاعة", "الرهد", "سواكن", "بارا", "أبو جبيهة", "طوكر", "الدلنج", "بابنوسة", "كريمة"],
+        "سوريا": ["دمشق", "حلب", "حمص", "حماة", "اللاذقية", "طرطوس", "إدلب", "دير الزور", "الحسكة", "الرقة", "السويداء", "درعا", "القنيطرة", "الميادين", "البوكمال", "جبلة", "تل أبيض", "منبج", "إعزاز", "الباب", "صلخد", "دوما", "داريا", "الزبداني", "السلمية", "مصياف", "بانياس", "صافيتا", "المالكية", "عامودا"],
+        "لبنان": ["بيروت", "طرابلس", "صيدا", "صور", "جبيل", "بعلبك", "زحلة", "النبطية", "جونية", "عاليه", "بعبدا", "بشري", "بعقلين", "شتورة", "دير القمر", "تبنين", "حاصبيا", "جب جنين", "راشيا", "بنت جبيل"],
+        "الأردن": ["عمان", "الزرقاء", "إربد", "العقبة", "المفرق", "السلط", "الكرك", "معان", "مادبا", "جرش", "عجلون", "الرمثا", "الطفيلة", "الفحيص", "الصويفية", "دير علا", "الشوبك"],
+        "تونس": ["تونس", "صفاقس", "سوسة", "بنزرت", "قابس", "القيروان", "تونس العاصمة", "سوسة", "صفاقس", "نابل", "قفصة", "المهدية", "القيروان", "بنزرت", "سليانة", "جندوبة", "زغوان", "مدنين", "قبلي", "تطاوين", "المنيهلة"],
+        "العراق": ["بغداد", "البصرة", "الموصل", "أربيل", "النجف", "كربلاء", "دهوك", "السليمانية", "الكوت", "بعقوبة", "سامراء", "الرمادي", "الفلوجة", "تكريت", "الحلة"],
+        "اليمن": ["صنعاء", "عدن", "تعز", "الحديدة", "إب", "حضرموت", "ذمار", "البيضاء", "شبوة", "الجوف", "مأرب", "الضالع", "حجة", "المهرة", "لحج"],
+        "ليبيا": ["طرابلس", "بنغازي", "مصراتة", "سبها", "درنة", "الزاوية", "البيضاء", "جادو", "غريان", "اجدابيا", "زليتن", "الخمس", "ترهونة"],
+        "موريتانيا": ["نواكشوط", "نواذيبو", "كيفه", "روصو", "العيون", "أطار", "أكجوجت", "سيلبابي", "كيهيدي", "تجكجة"],
+        "البحرين": ["المنامة", "المحرق", "الرفاع", "الحد", "سترة", "جد حفص", "عيسى", "الدراز", "البديع", "الزلاق"],
+        "عمان": ["مسقط", "صلالة", "نزوى", "بهلاء", "صور", "البريمي", "صحار", "بركاء", "عبري", "سيت", "دماء والطائيين", "مطرح", "الخابورة", "إبراء", "جعلان بني بو علي", "الرستاق", "الكامل والوافي", "وادي المعاول"],
+        "جيبوتي": ["جيبوتي (العاصمة)", "تاجورة", "علي سابيح", "دوراليه", "قوريولي", "بليلة", "فجر", "دمجلي", "عسل", "أوبوك"],
+        "فلسطين": ["القدس", "رام الله", "نابلس", "بيت لحم", "الخليل", "جنين", "طولكرم", "قلقيلية", "أريحا", "سلفيت", "طوباس", "بيت لحم", "غزة", "خان يونس", "رفح", "دير البلح", "خانيونس", "الشجاعية", "الزوايدة", "النصيرات", "المغازي", "بيت لاهيا"],
+        "الصومال": ["مقديشو (العاصمة)", "بوساسو", "هرجيسا", "جالكعيو", "برعو", "كيسمايو", "بيدوا", "بلدوين", "طوسمريب", "جروي", "ملسو", "طوكر", "لوقا"],
+        "جزر القمر": ["موروني (العاصمة)", "موهيلي", "أنجوان", "جزيرة القمر الكبرى", "نينغوي", "موي"],
+        "إريتريا": ["أسمرة (العاصمة)", "كرن", "مصوع", "نيقلا", "تسني", "بارنتو", "دفني", "عدال"],
+        "جنوب السودان": ["جوبا (العاصمة)", "واو", "ملكال", "بور", "ياي", "ملوال", "جوزي", "رياك", "أروب"]
+    };
+
+    function getPrayerContainer() {
+        return document.querySelector('.prayer-container');
     }
 
-    function handleCityChange(selectElement) {
-        const selectedCity = selectElement.value;
-        const selectedCountry = selectElement.closest('.prayer-container').querySelector('select:nth-of-type(1)').value;
+    function updatePickerButtons(container = getPrayerContainer()) {
+        const countryButton = container.querySelector('.country-picker-button');
+        const cityButton = container.querySelector('.city-picker-button');
+        countryButton.textContent = selectedCountry || 'اختر الدولة';
+        cityButton.textContent = selectedCity || 'اختر المدينة';
+        cityButton.disabled = !selectedCountry;
+    }
+
+    function openLocationPicker(type) {
+        if (type === 'city' && !selectedCountry) return;
+        const layer = document.querySelector('.location-picker-layer');
+        const panels = document.querySelectorAll('.location-picker-panel');
+        panels.forEach(panel => panel.classList.toggle('active', panel.dataset.picker === type));
+        layer.classList.add('show');
+        renderPickerOptions(type, '');
+        const searchInput = document.querySelector(`.${type}-picker-search`);
+        if (searchInput) {
+            searchInput.value = '';
+            searchInput.blur();
+        }
+    }
+
+    function closeLocationPicker(event) {
+        if (event && event.target !== event.currentTarget) return;
+        const layer = document.querySelector('.location-picker-layer');
+        if (!layer) return;
+        layer.classList.remove('show');
+        setTimeout(() => {
+            if (!layer.classList.contains('show')) {
+                layer.querySelectorAll('.location-picker-panel').forEach(panel => panel.classList.remove('active'));
+            }
+        }, 450);
+    }
+
+    function renderPickerOptions(type, query = '') {
+        const list = document.querySelector(`.${type}-picker-list`);
+        const options = type === 'country' ? Object.keys(countriesAndCities) : (countriesAndCities[selectedCountry] || []);
+        const normalizedQuery = query.trim().toLowerCase();
+        const filteredOptions = options.filter(option => option.toLowerCase().includes(normalizedQuery));
+        list.innerHTML = '';
+
+        if (!filteredOptions.length) {
+            const empty = document.createElement('div');
+            empty.className = 'location-picker-empty';
+            empty.textContent = 'لا توجد نتائج';
+            list.appendChild(empty);
+            return;
+        }
+
+        filteredOptions.forEach(option => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'location-picker-option';
+            button.textContent = option;
+            if ((type === 'country' && option === selectedCountry) || (type === 'city' && option === selectedCity)) {
+                button.classList.add('selected');
+            }
+            button.onclick = () => type === 'country' ? chooseCountry(option) : chooseCity(option);
+            list.appendChild(button);
+        });
+    }
+
+    function chooseCountry(country) {
+        selectedCountry = country;
+        selectedCity = '';
+        localStorage.setItem('selectedCountry', selectedCountry);
+        localStorage.removeItem('selectedCity');
+        updatePickerButtons();
+        closeLocationPicker();
+    }
+
+    function chooseCity(city) {
+        selectedCity = city;
+        updatePickerButtons();
+        closeLocationPicker();
         if (selectedCity && selectedCountry) {
-            fetchPrayerTimes(selectedCity, selectedCountry, selectElement);
+            fetchPrayerTimes(selectedCity, selectedCountry, getPrayerContainer());
         }
-    }
-
-    function populateCountries(selectElement) {
-        for (let country in countriesAndCities) {
-            const option = document.createElement('option');
-            option.value = country;
-            option.textContent = country;
-            selectElement.appendChild(option);
-        }
-    }
-
-    // populateCities مع callback اختياري بعد الانتهاء
-    function populateCities(country, citySelect, callback) {
-        citySelect.innerHTML = '<option value="">اختر المدينة</option>';
-        citySelect.disabled = true;
-        if (country && countriesAndCities[country]) {
-            citySelect.disabled = false;
-            countriesAndCities[country].forEach(city => {
-                const option = document.createElement('option');
-                option.value = city;
-                option.textContent = city;
-                citySelect.appendChild(option);
-            });
-        }
-        // تحديث select2 بعد تعبئة الخيارات
-        $(citySelect).trigger('change.select2');
-        if (typeof callback === 'function') callback();
     }
 
     window.onload = function () {
         const container = document.querySelector('.prayer-container');
-        const countrySelect = container.querySelector('select:nth-of-type(1)');
-        populateCountries(countrySelect);
-        // تحديث select2 بعد تعبئة الدول
-        $(countrySelect).trigger('change.select2');
+        renderPickerOptions('country');
+        updatePickerButtons(container);
         // استرجاع آخر اختيار للمستخدم تلقائياً
         updateUIFromLocalStorage(container);
         updateDate();
         setInterval(updateDate, 24 * 60 * 60 * 1000);
     };
 
-    function fetchPrayerTimes(city, country, selectElement) {
+    function fetchPrayerTimes(city, country, container) {
         const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
                 const timings = data.data.timings;
-                const container = selectElement.closest('.prayer-container');
                 displayTimings(timings, container);
-                const selectedCountry = container.querySelector('select:nth-of-type(1)').value;
-                const selectedCity = container.querySelector('select:nth-of-type(2)').value;
                 saveToLocalStorage(selectedCountry, selectedCity, timings);
                 updateCountdown(timings, container);
             });
@@ -912,86 +1082,6 @@ border-collapse: collapse;
         setTimeout(() => ripple.remove(), 600);
     }
     </script>
-
-    <style>
-    body .select2-container .select2-selection--single {
-        font-family: system-ui;
-        cursor: pointer;
-        outline: none;
-        margin: 0 5px;
-        border: none;
-        border-radius: 7px;
-        color: #677483;
-        background-color: #f6f7f9;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-image: url(image/download.png);
-        background-repeat: no-repeat;
-        background-position: calc(100% - 8px) center;
-        background-size: 10px;
-        height: 34px;
-    }
-    body .select2-container--default .select2-selection--single .select2-selection__arrow { display: none; }
-    body .select2-container .select2-selection--single .select2-selection__rendered {
-        overflow: hidden;
-        padding: 3px 0;
-    }
-    body .select2-container--default .select2-search--dropdown .select2-search__field {
-        text-align: right;
-        font-family: system-ui;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: #f6f7f9;
-        color: #677483;
-    }
-    body .select2-container--default .select2-results__option {
-    padding: 10px 13px;
-    margin: 0 4px;
-    margin-right: 0;
-    text-align: right;
-    color: #677483;
-    background-color: #f6f7f900;
-    font-family: system-ui;
-    border-radius: 10px;
-    }
-    body .select2-container--default .select2-results__option--highlighted {
-        background-color: #e2e6ea;
-        color: #333;
-    }
-    body .select2-container--default .select2-selection--single .select2-selection__rendered { color: #444; }
-    body .select2-container { z-index: 11; }
-    body .select2-container--open .select2-dropdown--above {
-        box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
-        overflow: hidden;
-        border-bottom: 1px solid #aaa;
-        border-radius: 5px;
-    }
-    body .select2-container--open .select2-dropdown--below {
-        box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
-        overflow: hidden;
-        border-top: 1px solid #aaa;
-        border-radius: 5px;
-    }
-    body .select2-container--default .select2-selection--single .select2-selection__clear {
-        cursor: pointer;
-        float: left;
-        font-weight: bold;
-        left: 20px;
-    }
-    body .select2-container--default .select2-results>.select2-results__options {
-        max-height: 400px;
-        overflow-y: auto;
-    }
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar { width: 5px; }
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb { background: #b8b8b85d; border-radius: 10px; }
-    body .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-track { background: #f1f1f100; border-radius: 10px; }
-    body .select2-container--default .select2-results>.select2-results__options:hover::-webkit-scrollbar-thumb { background: #c9c9c9; }
-    body .select2-container--default .select2-results__option[aria-selected=true] { background-color: #f6f7f9; }
-    body .select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #5897fb; color: white; }
-    body .select2-container--default.select2-container--disabled .select2-selection--single { background-color: #f6f7f9; cursor: default; filter: opacity(0.5); }
-    </style>
 
 </body>
 </html>
