@@ -138,11 +138,12 @@ position: fixed;
     }
     .location-picker-panel.active { display: flex; }
     .location-picker-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 10px;
+            display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 12px;
+    margin-bottom: 10px;
+    height: 36px;
     }
     .location-picker-title {
         color: #677483;
@@ -150,21 +151,25 @@ position: fixed;
         font-weight: 600;
     }
     .location-picker-close {
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 50%;
-    color: #677483;
-    background-color: #f6f7f9;
-    font-size: 22px;
-    font-family: math;
-    line-height: 0;
-    display: grid;
-    align-items: center;
-    justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: none;
+        border-radius: 50%;
+        color: #677483;
+        background-color: #0000;
+        font-size: 26px;
+        font-family: math;
+        line-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .location-picker-close:active {
+        background-color: #f6f7f9;
     }
     .location-picker-search {
         box-sizing: border-box;
+        direction: rtl;
         width: 100%;
         height: 42px;
         margin-bottom: 10px;
