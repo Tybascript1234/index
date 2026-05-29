@@ -753,7 +753,7 @@ border-collapse: collapse;
     <div class="location-picker-layer" onclick="closeLocationPicker(event)">
         <div class="location-picker-panel country-picker-panel" data-picker="country" onclick="event.stopPropagation()">
             <div class="location-picker-header">
-                <span class="ccvve">0</span>
+                <!-- <span class="ccvve">0</span> -->
                 <div class="flex">
                    <span class="location-picker-title">اختر الدولة</span>
                     <button type="button" class="location-picker-close" onclick="closeLocationPicker()"><span class="material-symbols-outlined">close</span></button> 
@@ -765,7 +765,7 @@ border-collapse: collapse;
 
         <div class="location-picker-panel city-picker-panel" data-picker="city" onclick="event.stopPropagation()">
             <div class="location-picker-header">
-                <span class="ccvve">0</span>
+                <!-- <span class="ccvve">0</span> -->
                 <div class="flex">
                     <span class="location-picker-title">اختر المدينة</span>
                     <button type="button" class="location-picker-close" onclick="closeLocationPicker()"><span class="material-symbols-outlined">close</span></button>
@@ -895,6 +895,7 @@ border-collapse: collapse;
             searchInput.value = '';
             searchInput.blur();
         }
+        setTimeout(() => scrollToSelectedPickerOption(type), 80);
     }
 
     function closeLocationPicker(event) {
@@ -934,6 +935,18 @@ border-collapse: collapse;
             }
             button.onclick = () => type === 'country' ? chooseCountry(option) : chooseCity(option);
             list.appendChild(button);
+        });
+    }
+
+    function scrollToSelectedPickerOption(type) {
+        const list = document.querySelector(`.${type}-picker-list`);
+        const selectedOption = list ? list.querySelector('.location-picker-option.selected') : null;
+        if (!list || !selectedOption) return;
+
+        const targetTop = selectedOption.offsetTop - (list.clientHeight / 2) + (selectedOption.clientHeight / 2);
+        list.scrollTo({
+            top: Math.max(targetTop, 0),
+            behavior: 'smooth'
         });
     }
 
@@ -1000,23 +1013,25 @@ border-collapse: collapse;
             }
         }
 
-        if (nextPrayer) {
-            nextPrayer.row.classList.add('highlighted-next-prayer');
-            const diff = nextPrayer.time.diff(now);
-
-            // العداد بأرقام عربية
-            const hh = toArabicNumerals(Math.floor(diff / 3600000).toString().padStart(2, '0'));
-            const mm = toArabicNumerals((Math.floor(diff / 60000) % 60).toString().padStart(2, '0'));
-            const ss = toArabicNumerals((Math.floor(diff / 1000) % 60).toString().padStart(2, '0'));
-            container.querySelector('.prayer-countdown-timer').textContent = `${hh}:${mm}:${ss}`;
-            container.querySelector('.next-prayer-time').textContent = formatTimeArabic(nextPrayer.time.format("HH:mm"));
-
-            if (diff < 1000 * 60) showAdhanAlert();
-            countdownTimeout = setTimeout(() => updateCountdown(timings, container), 1000);
-        } else {
-            container.querySelector('.prayer-countdown-timer').textContent = "٠٠:٠٠:٠٠";
-            container.querySelector('.next-prayer-time').textContent = "غداً";
+        if (!nextPrayer) {
+            nextPrayer = {
+                row: container.querySelector('.fajr-prayer-row'),
+                time: moment(timings.Fajr, "HH:mm").add(1, 'day')
+            };
         }
+
+        nextPrayer.row.classList.add('highlighted-next-prayer');
+        const diff = nextPrayer.time.diff(now);
+
+        // العداد بأرقام عربية
+        const hh = toArabicNumerals(Math.floor(diff / 3600000).toString().padStart(2, '0'));
+        const mm = toArabicNumerals((Math.floor(diff / 60000) % 60).toString().padStart(2, '0'));
+        const ss = toArabicNumerals((Math.floor(diff / 1000) % 60).toString().padStart(2, '0'));
+        container.querySelector('.prayer-countdown-timer').textContent = `${hh}:${mm}:${ss}`;
+        container.querySelector('.next-prayer-time').textContent = formatTimeArabic(nextPrayer.time.format("HH:mm"));
+
+        if (diff < 1000 * 60) showAdhanAlert();
+        countdownTimeout = setTimeout(() => updateCountdown(timings, container), 1000);
     }
 
     function showAdhanAlert() {
