@@ -416,10 +416,6 @@ border-collapse: collapse;
         transform: scale(0.95);
         opacity: .6;
     }
-    .select2-search--dropdown .select2-search__field:focus {
-    outline: none;
-    box-shadow: none;
-}
     </style>
 </head>
 <body>
@@ -631,33 +627,33 @@ border-collapse: collapse;
 
     // ========== select2 مع منع الفوكس التلقائي ==========
     $(document).ready(function () {
-        $('.mySelect').select2({
-            placeholder: "اختر من القائمة",
-            allowClear: true
-        });
-
-        // منع الفوكس التلقائي على خانة البحث عند فتح القائمة
-        $(document).on('select2:open', function () {
-            // إزالة الفوكس من حقل البحث فوراً
-            setTimeout(function () {
-                const searchField = document.querySelector('.select2-container--open .select2-search__field');
-                if (searchField) {
-                    searchField.blur();
-                }
-            }, 0);
-        });
-
-        $('.mySelect').on('select2:open', function () {
-            let selectedOption = $(this).find(':selected').text();
-            setTimeout(function () {
-                let searchField = document.querySelector('.select2-container--open .select2-search__field');
-                if (searchField) {
-                    searchField.setAttribute('placeholder', selectedOption || 'ابحث هنا');
-                    searchField.blur();
-                }
-            }, 0);
-        });
+    $('.mySelect').select2({
+        placeholder: "اختر من القائمة",
+        allowClear: true
     });
+
+    // منع الفوكس التلقائي على خانة البحث عند فتح القائمة
+    $(document).on('select2:open', function () {
+        const searchField = document.querySelector('.select2-container--open .select2-search__field');
+        if (searchField) {
+            searchField.setAttribute('readonly', 'readonly'); // يمنع لوحة المفاتيح على الموبايل
+        }
+    });
+
+    $('.mySelect').on('select2:open', function () {
+        const selectedOption = $(this).find(':selected').text();
+
+        const searchField = document.querySelector('.select2-container--open .select2-search__field');
+        if (searchField) {
+            searchField.setAttribute('placeholder', selectedOption || 'ابحث هنا');
+        }
+    });
+
+    // عند الكتابة: أزل readonly حتى يتمكن من البحث
+    $(document).on('keydown', '.select2-search__field', function () {
+        $(this).removeAttr('readonly');
+    });
+});
     </script>
 
     <script>
