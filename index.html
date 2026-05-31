@@ -571,6 +571,26 @@ border-collapse: collapse;
         font-weight: 500;
         display: none;
     }
+    .kkoopd {
+        display: flex;
+        align-items: center;
+        width: max-content;
+        margin: auto;
+    }
+    .kkoopd button {
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 30px;
+        background: #f6f7f900;
+        color: #677483;
+        margin: 0 10px;
+    }
+    .kkoopd xxe {
+        height: 24px;
+        background: #e2e2e2;
+        width: 1px;
+    }
     </style>
 </head>
 <body>
@@ -580,7 +600,7 @@ border-collapse: collapse;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <div class="Prayer-times prayer-times-container" id="settingsDiv">
-            <button onclick="window.open('https://wa.me/?text=https://index-ten-beta.vercel.app/')" style="right: auto; left: 0;" class="material-symbols-outlined times-button"><span>share</span></button>
+            <button style="right: auto; left: 0;" class="material-symbols-outlined times-button" id="location_on" onclick="detectLocationAndLoad(this)"><span>location_on</span></button>
             <button onclick="scrollToDiv('section-4', this)" class="material-symbols-outlined times-button"><span>code</span></button>
             <div class="Prayer-image cor"><img src="image/mosque.png" alt=""></div>
             <div class="prayer-timesa">
@@ -732,6 +752,10 @@ border-collapse: collapse;
                         <textarea readonly class="c-sec copyable"><iframe src="https://index-ten-beta.vercel.app/" frameborder="0"></iframe></textarea>
                         <gol></gol>
                         <span class="ss">🤲 هذا ماتيسر لا تنسانا من صالح دعائك</span>
+                        <div class="kkoopd">
+                            <button class="material-symbols-outlined" onclick="window.open('https://wa.me/966597530810', '_blank')"> <ion-icon name="chatbubbles-outline"></ion-icon> </button>                            <xxe></xxe>
+                            <button onclick="window.open('https://wa.me/?text=https://index-ten-beta.vercel.app/')" class="material-symbols-outlined"><span>share</span></button>
+                        </div>
                         <div class="good cor">تم الإصدار عام ,١٠/١/٢٠٢٤م<br><span> جميع الحقوق محفوظة لدى <a href="https://quran-eight-zeta.vercel.app/" style="text-decoration: none;color: #4d4d4d;">نور القرآن</a></span> </div>
                     </div>
                 </div>
@@ -776,7 +800,7 @@ border-collapse: collapse;
         </div>
     </div>
 
-    <script src="data-eng-196-(-).js"></script>
+    <script src="data.js"></script>
     
     <script>
     // ========== دالة تحويل الأرقام إلى عربية ==========
@@ -979,6 +1003,133 @@ border-collapse: collapse;
         updateDate();
         setInterval(updateDate, 24 * 60 * 60 * 1000);
     };
+
+    // ========== تحديد الموقع الجغرافي تلقائياً ==========
+    async function detectLocationAndLoad(btn) {
+        if (!navigator.geolocation) {
+            alert('المتصفح لا يدعم تحديد الموقع الجغرافي');
+            return;
+        }
+
+        btn.style.opacity = '0.5';
+        btn.style.pointerEvents = 'none';
+        const originalSpan = btn.querySelector('span');
+        const originalText = originalSpan.textContent;
+        originalSpan.textContent = 'my_location';
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+                try {
+                    // جلب الاسم بالإنجليزية (لمطابقة data.js) والعربية (لعرض أسماء مألوفة) في نفس الوقت
+                    const [resEn, resAr] = await Promise.all([
+                        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=en`),
+                        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=ar`)
+                    ]);
+                    const [dataEn, dataAr] = await Promise.all([resEn.json(), resAr.json()]);
+
+                    const addrEn = dataEn.address;
+                    const addrAr = dataAr.address;
+
+                    // استخراج الأسماء الإنجليزية للمطابقة مع data.js
+                    const countryEn = addrEn.country || '';
+                    const cityEn =
+                        addrEn.city ||
+                        addrEn.town ||
+                        addrEn.village ||
+                        addrEn.county ||
+                        addrEn.state_district ||
+                        addrEn.state ||
+                        '';
+
+                    // استخراج الأسماء العربية للعرض في الرسائل
+                    const countryAr = addrAr.country || countryEn;
+                    const cityAr =
+                        addrAr.city ||
+                        addrAr.town ||
+                        addrAr.village ||
+                        addrAr.county ||
+                        addrAr.state_district ||
+                        addrAr.state ||
+                        cityEn;
+
+                    if (!countryEn) {
+                        alert('تعذّر تحديد الدولة من موقعك، يرجى الاختيار يدوياً');
+                        resetBtn();
+                        return;
+                    }
+
+                    // دالة مطابقة مرنة تتجاهل الحالة وتبحث جزئياً
+                    function flexMatch(list, name) {
+                        if (!name) return null;
+                        const norm = s => s.toLowerCase().replace(/[\s\-''.]/g, '');
+                        const normName = norm(name);
+                        // تطابق تام أولاً
+                        let found = list.find(c => norm(c) === normName);
+                        if (found) return found;
+                        // تطابق جزئي: القائمة تحتوي الاسم أو الاسم يحتوي القائمة
+                        found = list.find(c => norm(c).includes(normName) || normName.includes(norm(c)));
+                        return found || null;
+                    }
+
+                    const availableCountries = Object.keys(countriesAndCities);
+
+                    // نبحث بالاسم الإنجليزي أولاً (لأن data.js إنجليزي)
+                    let matchedCountry = flexMatch(availableCountries, countryEn);
+
+                    if (!matchedCountry) {
+                        alert(`دولتك "${countryAr}" غير متوفرة في القائمة حالياً، يرجى الاختيار يدوياً`);
+                        resetBtn();
+                        return;
+                    }
+
+                    const availableCities = countriesAndCities[matchedCountry] || [];
+
+                    // البحث بالاسم الإنجليزي أولاً ثم العربي كاحتياطي
+                    let matchedCity = flexMatch(availableCities, cityEn);
+                    if (!matchedCity && cityAr !== cityEn) {
+                        matchedCity = flexMatch(availableCities, cityAr);
+                    }
+
+                    selectedCountry = matchedCountry;
+                    localStorage.setItem('selectedCountry', selectedCountry);
+
+                    if (matchedCity) {
+                        selectedCity = matchedCity;
+                        localStorage.setItem('selectedCity', selectedCity);
+                        updatePickerButtons();
+                        fetchPrayerTimes(selectedCity, selectedCountry, getPrayerContainer());
+                    } else {
+                        // المدينة غير موجودة — اعرض قائمة المدن للاختيار
+                        selectedCity = '';
+                        localStorage.removeItem('selectedCity');
+                        updatePickerButtons();
+                        openLocationPicker('city');
+                    }
+
+                } catch (err) {
+                    alert('حدث خطأ أثناء تحديد الموقع، يرجى المحاولة مجدداً');
+                } finally {
+                    resetBtn();
+                }
+            },
+            (error) => {
+                let msg = 'تعذّر الحصول على الموقع الجغرافي';
+                if (error.code === error.PERMISSION_DENIED) msg = 'تم رفض إذن الموقع، يرجى السماح للمتصفح بالوصول إليه';
+                else if (error.code === error.POSITION_UNAVAILABLE) msg = 'الموقع غير متاح حالياً';
+                else if (error.code === error.TIMEOUT) msg = 'انتهت مهلة تحديد الموقع';
+                alert(msg);
+                resetBtn();
+            },
+            { timeout: 10000, maximumAge: 60000 }
+        );
+
+        function resetBtn() {
+            btn.style.opacity = '';
+            btn.style.pointerEvents = '';
+            originalSpan.textContent = originalText;
+        }
+    }
 
     function fetchPrayerTimes(city, country, container) {
         const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
